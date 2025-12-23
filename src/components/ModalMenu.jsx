@@ -9,6 +9,7 @@ function ModalMenu({User}) {
         try {
             const logout=toast.loading("Déconnexion en cours...",{duration:1700})
             const response = await axios.post("http://localhost:8000/Logout", {}, { withCredentials: true })
+            localStorage.clear()
             // console.log(response.data)
             if (response.data.status === 200) {
                 setTimeout(() => {

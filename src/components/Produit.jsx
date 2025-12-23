@@ -25,7 +25,7 @@ function Produit() {
         }
     }
     const key = `user_${UserInfo.id}_panier`
-    console.log(key)
+    // console.log(key)
     const AddToPanier =(userId,product)=>{
         const key = `user_${userId}_panier`
         
@@ -36,11 +36,16 @@ function Produit() {
     const HandleClick = async (id) => {
         setAdded(true)
         try {
-            const response = await axios.post(`http://localhost:8000/Product/${id}`, {}, { withCredentials: true })
-            console.log(response.data)
+            const Tab = JSON.parse(localStorage.getItem("ProduitDansPanier")) || []
+            // const response = await axios.post(`http://localhost:8000/Product/${id}`, {}, { withCredentials: true })
+            // console.log(response.data)
+            Tab.push(ProductInfo)
+            // console.log(Tab)
+            // console.log(ProductInfo)
+            localStorage.setItem("ProduitDansPanier",JSON.stringify(Tab))
             setTimeout(() => {
                 navigate("/Panier")
-            }, 1000);
+            }, 500);
         } catch (error) {
             console.log(error)
         }
