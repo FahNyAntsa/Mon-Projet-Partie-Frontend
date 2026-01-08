@@ -1,4 +1,4 @@
-import { MenuIcon, SearchIcon, ShoppingCartIcon, X } from "lucide-react";
+import { ShoppingCartIcon, UserCircle, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import ModalMenu from "../ModalMenu";
 
@@ -58,7 +58,7 @@ function HomeNavigationBarUsers({ handleClick, modalOpen,User,setModalOpen,Input
                         <Link to={"/Panier"}>
                             <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
                         </Link>
-                        {modalOpen?<X className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX}/>:<MenuIcon className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
+                        {modalOpen?<X className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX}/>:<UserCircle className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
                         {modalOpen && <ModalMenu User={User} />}
                         <p className="text-black text-[1.1vw] mt-2"></p>
                     </div>

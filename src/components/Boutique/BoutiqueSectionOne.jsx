@@ -18,6 +18,7 @@ function Boutique() {
     const navigate = useNavigate()
     const [AccessoriesOne, setAccessoriesOne] = useState([])
     const [User, setUser] = useState()
+    const [status, setStatus] = useState([])
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -56,6 +57,16 @@ function Boutique() {
             console.log(`une erreur ${error} s'est produit`)
         }
     }
+    const fetchCommand = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/Product", { withCredentials: true })
+            // console.log(response.data)
+            setStatus(response.data)
+            // console.log(status)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const HandleSearch = (e) => {
         setSearch(e.target.value)
         // fetchAllAccessoriesData()
@@ -77,6 +88,7 @@ function Boutique() {
     // console.log(AccessoriesOne)
     useEffect(() => {
         fetchAccessoriesOneData()
+        fetchCommand()
         // fetchAllAccessoriesData()
     }, [page])
     const Page = Array.from({ length: NombreTotalDePage }, (_, index) => index + 1)
@@ -97,6 +109,7 @@ function Boutique() {
                 HandleSearch={HandleSearch}
                 fetchDrumData={fetchDrumData}
                 setInputSearch={setInputSearch}
+                status={status}
             />
             <section className="w-full h-auto py-[9vw]  flex flex-col justify-center gap-[3vw]">
                 <h1 className="text-cyan-700 text-5xl text-center font-bold">Batteries</h1>
@@ -154,9 +167,9 @@ function Boutique() {
                         <SquareArrowRightIcon className="Usercircle" />
                     </button>
                 </div>) : ""}
-                
+
             </section>
-            
+
             <HomeSectionFooter />
         </>
     )

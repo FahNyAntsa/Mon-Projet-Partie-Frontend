@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Produit from "./Produit";
+import toast from "react-hot-toast";
 
 
 function Panier() {
@@ -13,10 +14,12 @@ function Panier() {
     const [User, setUser] = useState()
     const InputFocusRef = useRef()
     const [Product, setProduct] = useState([])
+    const [SelectedProduct, setSelectedProduct] = useState("")
     const [Prix, setPrix] = useState([])
     const [Quantity, setQuantity] = useState(1)
-    const [status, setStatus] = useState()
+    const [status, setStatus] = useState([])
     const [isCommand, setIsCommand] = useState(false)
+    const [PrixToCommand, setPrixToCommand] = useState("")
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -35,7 +38,7 @@ function Panier() {
             // setProduct(ProduitId)
             // console.log(ProduitId)
             setProduct(JSON.parse(localStorage.getItem("ProduitDansPanier")))
-            console.log(Product)
+            // console.log(Product)
         } catch (error) {
             console.log(error)
         }
@@ -45,6 +48,7 @@ function Panier() {
         try {
             const response = await axios.post(`http://localhost:8000/Product`, { id }, { withCredentials: true })
             console.log(response.data)
+
         } catch (error) {
             console.log(error)
         }
@@ -62,15 +66,6 @@ function Panier() {
             console.log(err)
         }
     }
-    // const CancelCommand= async(id)=>{
-    //     try {
-    //         const response = await axios.delete(`http://localhost:8000/Product/${id}`,{withCredentials:true})
-    //         console.log(response.data)
-    //         fetchData()
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
     const fetchCommand = async () => {
         try {
             const response = await axios.get("http://localhost:8000/Product", { withCredentials: true })
@@ -106,6 +101,21 @@ function Panier() {
         setProduct(JSON.parse(localStorage.getItem("ProduitDansPanier")))
         fetchCommand()
     }, [])
+    const Payer = (e, Prix,SelectedProduct) => {
+        e.preventDefault()
+        
+        if(PrixToCommand < Prix){
+            toast.error("Montant insuffisant")
+            return
+        }else{
+            setPrix(SelectedProduct.price), Commander(SelectedProduct.id), setIsCommand(true),CancelCommand(SelectedProduct.id),fetchCommand()
+            document.getElementById('my_modal_3').close()
+        } 
+
+        console.log(Prix)
+       
+    }
+    // console.log(status.length)
     // console.log(User)
     return (
         <>
@@ -121,6 +131,7 @@ function Panier() {
                 User={User}
                 InputFocusRef={InputFocusRef}
                 setInputSearch={setInputSearch}
+                status={status}
 
             />
             <section className="h-auto w-full px-[4vw] pt-[8vw] flex flex-col gap-[3vw]">
@@ -132,13 +143,14 @@ function Panier() {
                                 <th>Produit</th>
                                 <th>Prix</th>
                                 <th>Quantité</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
+                            {localStorage.getItem("ProduitDansPanier") && (localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
                                 <tr key={index}>
-                                    <td className="flex items-center gap-[5vw] w-[35vw]">
+                                    <td className="flex items-center gap-[5vw] w-[28vw]">
                                         <img src={`../src/assets/images/${p.pics} `} className="w-[12vw] h-[8vw] rounded-[.5vw]" alt="" />
                                         <div className="flex flex-col gap-1">
                                             <h1>{p.name}</h1>
@@ -154,29 +166,86 @@ function Panier() {
                                     </td>
                                     <td>{p.Price.toLocaleString("fr-FR")} ariary</td>
                                     <td>
-                                        <input type="number" className="w-[7vw]! text-[.9vw] text-black p-[1vw]!" min={1} defaultValue={1} placeholder="Entrez..." onChange={(e) => setQuantity(e.target.value)} />
+                                        {/* <input type="number" className="w-[7vw]! text-[.9vw] text-black p-[1vw]!" min={1} defaultValue={1} placeholder="Entrez..." onChange={(e) => setQuantity(e.target.value)} /> */}
+                                        1
+                                    </td>
+                                    <td>
+                                        <span className="badge badge-warning">
+                                            En attente
+                                        </span>
                                     </td>
                                     <td className=" w-[8vw] ">
                                         <div className="flex gap-4 items-center justify-center ">
-                                            <button className="bg-[#eeca00] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
-                                            <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => { setPrix(p.price), Commander(p.id), setIsCommand(true) }}>{isCommand?status.map(stat=>stat.status):"commander"}</button>
+                                            <button className="bg-red-400 text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
+                                            <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
+                                            {/* <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]">{isCommand ? status.map(stat => stat.status) : "commander"}</button> */}
                                         </div>
                                     </td>
                                 </tr>
-                            ))) : ""}
+
+                            ))) : "")}
+                            {(status.map((p, index) => (
+                                <tr key={index}>
+                                    <td className="flex items-center gap-[5vw] w-[35vw]">
+                                        <img src={`../src/assets/images/${p.pics} `} className="w-[12vw] h-[8vw] rounded-[.5vw]" alt="" />
+                                        <div className="flex flex-col gap-1">
+                                            <h1>{p.name}</h1>
+                                            <p className="text-[.8vw] Description">{p.describes}</p>
+                                            <div className="flex gap-1">
+                                                <Star className="Star" />
+                                                <Star className="Star" />
+                                                <Star className="Star" />
+                                                <Star className="Star" />
+                                                <Star className="Star" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{p.price.toLocaleString("fr-FR")} ariary</td>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        <span className="badge badge-info">{p.status}</span>
+                                    </td>
+                                    <td className=" w-[8vw] ">
+                                        <div className="flex gap-4 items-center justify-center ">
+                                            <button className="bg-red-400 text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw] opacity-50" disabled>Annuler</button>
+                                            <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw] opacity-50" disabled onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), Commander(p.id), setSelectedProduct(p) }}>Commander</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            )))}
                             {localStorage.getItem("ProduitDansPanier") ? (
                                 <tr>
-                                    <th colSpan={4} className="text-center">Total : {Total.toLocaleString("fr-FR")}  ariary</th>
+                                    <th colSpan={5} className="text-center">Total : {Total.toLocaleString("fr-FR")}  ariary</th>
                                 </tr>
                             ) : (
                                 <tr>
-                                    <th colSpan={4} className="text-center">Total : 0 ariary</th>
+                                    <th colSpan={5} className="text-center">Total : 0 ariary</th>
                                 </tr>
                             )}
                         </tbody>
                     </table>
+                    <dialog id="my_modal_3" className="modal">
+                        <div className="modal-box w-[30vw]! h-[13vw]">
+                            <form method="dialog">
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setPrixToCommand("")}>x</button>
+                            </form>
+                            {SelectedProduct && (
+                                <form action=""  className="flex flex-col gap-[.8vw]" onSubmit={(e)=>e.preventDefault()}>
+                                    <label htmlFor="Prix" className="text-cyan-700! text-center underline text-[1.5vw]!">Montant</label>
+                                    <div className="flex gap-[1vw] items-center mb-[1vw]! text-[1vw]">
+                                        <input type="number" id="Prix" placeholder="Entrez le montant à payer" className="w-[18vw]! text-black text-[1vw] px-[1vw]!" onChange={(e) => setPrixToCommand(e.target.value)} value={PrixToCommand} required />
+                                        (en Ariary)
+                                    </div>
+                                    <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={(e)=>{Payer(e, SelectedProduct.Price,SelectedProduct),fetchCommand()}}>Payer</button>
+                                </form>
+                            )}
+                        </div>
+                    </dialog>
                 </div>
-                <ChevronDown />
+                {/* <ChevronDown /> */}
             </section>
 
         </>

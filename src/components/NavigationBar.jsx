@@ -1,8 +1,8 @@
-import { MenuIcon, SearchIcon, ShoppingCartIcon, X } from "lucide-react";
+import { MenuIcon, SearchIcon, ShoppingCartIcon, UserCircle, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import ModalMenu from "./ModalMenu";
 
-function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch, setInputSearch, InputFocusRef, HandleSearch, setSearch, Search, fetchAccessoriesOneData, fetchDrumData, User, setModalOpen }) {
+function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch, setInputSearch, InputFocusRef, HandleSearch, setSearch, Search, fetchAccessoriesOneData, fetchDrumData, User, setModalOpen, status }) {
     const path = window.location.pathname
     const handleClickX = () => {
         setModalOpen(false)
@@ -59,13 +59,16 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
 
                         <input type="text" placeholder="Rechecher un produit..." className={`absolute left-[-49vw] w-[48vw]! h-[3vw]! text-black top-[-0.3vw] text-[1vw] Input ${InputSearch ? "opacity-100" : "opacity-0 cursor-default"}`} onChange={HandleSearch} ref={InputFocusRef} value={Search} />
                         <Link to={"/Panier"}>
-                            <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
+                            {status ? (status.length === 0 ? <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} /> : <div className="indicator">
+                                <span className="indicator-item badge badge-xs badge-error">{status.length}</span>
+                                <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
+                            </div>):(<ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />)}
                         </Link>
                         {/* <MenuIcon className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} /> */}
-                        {modalOpen ? <X className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX}/> : <MenuIcon className="text-white Usercircle cursor-pointer" onClick={handleClick} />}
+                        {modalOpen ? <X className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <UserCircle className="text-white Usercircle cursor-pointer" onClick={handleClick} />}
                         {modalOpen && <ModalMenu User={User} />}
                         <p></p>
-                        
+
                     </div>
                 </div>
             </header>
