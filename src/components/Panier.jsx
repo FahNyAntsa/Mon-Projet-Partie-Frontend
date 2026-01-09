@@ -101,19 +101,19 @@ function Panier() {
         setProduct(JSON.parse(localStorage.getItem("ProduitDansPanier")))
         fetchCommand()
     }, [])
-    const Payer = (e, Prix,SelectedProduct) => {
+    const Payer = (e, Prix, SelectedProduct) => {
         e.preventDefault()
-        
-        if(PrixToCommand < Prix){
+
+        if (PrixToCommand < Prix) {
             toast.error("Montant insuffisant")
             return
-        }else{
-            setPrix(SelectedProduct.price), Commander(SelectedProduct.id), setIsCommand(true),CancelCommand(SelectedProduct.id),fetchCommand()
+        } else {
+            setPrix(SelectedProduct.price), Commander(SelectedProduct.id), setIsCommand(true), CancelCommand(SelectedProduct.id), fetchCommand()
             document.getElementById('my_modal_3').close()
-        } 
+        }
 
         console.log(Prix)
-       
+
     }
     // console.log(status.length)
     // console.log(User)
@@ -150,17 +150,21 @@ function Panier() {
                         <tbody>
                             {localStorage.getItem("ProduitDansPanier") && (localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
                                 <tr key={index}>
-                                    <td className="flex items-center gap-[5vw] w-[28vw]">
-                                        <img src={`../src/assets/images/${p.pics} `} className="w-[12vw] h-[8vw] rounded-[.5vw]" alt="" />
-                                        <div className="flex flex-col gap-1">
-                                            <h1>{p.name}</h1>
-                                            <p className="text-[.8vw] Description">{p.describes}</p>
-                                            <div className="flex gap-1">
-                                                <Star className="Star" />
-                                                <Star className="Star" />
-                                                <Star className="Star" />
-                                                <Star className="Star" />
-                                                <Star className="Star" />
+                                    <td className=" w-[35vw] align-middle">
+                                        <div className="flex items-center w-full justify-center gap-[2vw] h-[8vw]gap-[5vw]">
+                                            <div className=" w-[10vw] h-[7vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                                <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" />
+                                            </div>
+                                            <div className="flex flex-col gap-1 flex-1">
+                                                <h1>{p.name}</h1>
+                                                <p className="text-[.8vw] Description">{p.describes}</p>
+                                                <div className="flex gap-1">
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
@@ -186,17 +190,21 @@ function Panier() {
                             ))) : "")}
                             {(status.map((p, index) => (
                                 <tr key={index}>
-                                    <td className="flex items-center gap-[5vw] w-[35vw]">
-                                        <img src={`../src/assets/images/${p.pics} `} className="w-[12vw] h-[8vw] rounded-[.5vw]" alt="" />
-                                        <div className="flex flex-col gap-1">
-                                            <h1>{p.name}</h1>
-                                            <p className="text-[.8vw] Description">{p.describes}</p>
-                                            <div className="flex gap-1">
-                                                <Star className="Star" />
-                                                <Star className="Star" />
-                                                <Star className="Star" />
-                                                <Star className="Star" />
-                                                <Star className="Star" />
+                                    <td className=" w-[35vw] align-middle">
+                                        <div className="flex items-center w-full justify-center gap-[2vw] h-[8vw]gap-[5vw]">
+                                            <div className=" w-[10vw] h-[7vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                                <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" />
+                                            </div>
+                                            <div className="flex flex-col gap-1 flex-1">
+                                                <h1>{p.name}</h1>
+                                                <p className="text-[.8vw] Description">{p.describes}</p>
+                                                <div className="flex gap-1">
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                    <Star className="Star" />
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
@@ -233,13 +241,13 @@ function Panier() {
                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setPrixToCommand("")}>x</button>
                             </form>
                             {SelectedProduct && (
-                                <form action=""  className="flex flex-col gap-[.8vw]" onSubmit={(e)=>e.preventDefault()}>
+                                <form action="" className="flex flex-col gap-[.8vw]" onSubmit={(e) => e.preventDefault()}>
                                     <label htmlFor="Prix" className="text-cyan-700! text-center underline text-[1.5vw]!">Montant</label>
                                     <div className="flex gap-[1vw] items-center mb-[1vw]! text-[1vw]">
                                         <input type="number" id="Prix" placeholder="Entrez le montant à payer" className="w-[18vw]! text-black text-[1vw] px-[1vw]!" onChange={(e) => setPrixToCommand(e.target.value)} value={PrixToCommand} required />
                                         (en Ariary)
                                     </div>
-                                    <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={(e)=>{Payer(e, SelectedProduct.Price,SelectedProduct),fetchCommand()}}>Payer</button>
+                                    <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={(e) => { Payer(e, SelectedProduct.Price, SelectedProduct), fetchCommand() }}>Payer</button>
                                 </form>
                             )}
                         </div>
