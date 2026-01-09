@@ -1,9 +1,8 @@
-import { ChevronDown, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import NavigationBar from "./NavigationBar";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import Produit from "./Produit";
 import toast from "react-hot-toast";
 
 
@@ -134,7 +133,7 @@ function Panier() {
                 status={status}
 
             />
-            <section className="h-auto w-full px-[4vw] pt-[8vw] flex flex-col gap-[3vw]">
+            <section className="h-auto w-full px-[4vw]  pt-[8vw] flex flex-col gap-[3vw]">
                 <h1 className="text-cyan-700 text-5xl text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
                 <div className="overflow-x rounded-box bg-[#171c27] border h-auto border-base-content/8 w-full">
                     <table className="table">

@@ -39,8 +39,8 @@ function HomeSectionOne() {
                 className="w-full h-screen flex justify-center items-center flex-col gap-9" id="SignInSection"
                 onClick={() => { setInputSearch(false) }}
             >
-                <div className="flex justify-evenly items-center">
-                    <div className="flex flex-col gap-[2vw] w-1/2">
+                <div className="flex w-[43vw]">
+                    <div className="flex flex-col gap-[2vw] w-full bg-amber-400 p-[2vw] rounded-[1vw] Bienvenu">
                         <h1 className="text-white text-3xl font-bold">Bienvenue sur
                             <span className="text-[#00FFFF] text-[2.5vw]"> Aponga maro Anaka</span>
                         </h1>
@@ -53,9 +53,9 @@ function HomeSectionOne() {
                             </button>
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <img src="../src/assets/snaredrum_233695612_1000-removebg-preview.png" className="w-[45vw] h-[30vw] " alt="" />
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </>

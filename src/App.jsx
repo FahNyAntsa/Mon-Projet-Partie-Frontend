@@ -9,6 +9,8 @@ import Boutique from './components/Boutique/Boutique'
 import Produit from './components/Produit'
 import Panier from './components/Panier'
 import { Toaster } from 'react-hot-toast'
+import Dashboard from './components/Dashboard/Dashboard'
+import DashProduit from './components/Dashboard/DashProduit'
 
 const Router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const Router = createBrowserRouter([
   {
     path: "/Panier",
     element: <Panier />
+  },
+  {
+    path:"/Dashboard",
+    element:<Dashboard/>
+  },
+  {
+    path:"/DashProduit",
+    element:<DashProduit/>
   }
 ])
 function App() {

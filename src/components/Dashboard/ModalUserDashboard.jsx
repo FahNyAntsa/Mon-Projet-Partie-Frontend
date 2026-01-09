@@ -1,8 +1,8 @@
-import { LayoutDashboard, LogOutIcon } from "lucide-react";
+import { Home, LayoutDashboard, LogOutIcon } from "lucide-react";
 import axios from "axios"
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-function ModalMenu({ User }) {
+function ModalUserDashboard({ User }) {
     const navigate = useNavigate()
     const Logout = async (e) => {
         e.preventDefault()
@@ -23,21 +23,13 @@ function ModalMenu({ User }) {
     }
     return (
         <>
-            <div className={`w-[13vw]  ${User.email === "Administrateur@gmail.com" ? "h-[15vw]" : "h-[13vw]"} flex flex-col gap-[1vw] bg-white rounded-[1vw] absolute right-6 top-[4.5vw] p-2 pt-[1vw]`}>
+            <div className={`w-[13vw] h-[10vw] flex flex-col gap-[1vw] bg-white rounded-[1vw] absolute right-6 top-[4.5vw] p-2 pt-[1vw] z-100`}>
                 <div className="flex flex-col gap-1 justify-center items-center">
-                    {User.email === "Administrateur@gmail.com" ? (
-                        <div className="indicator">
-                            <span className=" indicator-item badge badge-xs badge-primary">admin</span>
-                            <img src={`http://localhost:8000/upload/users/${User.photo}`} className="w-[5vw] h-[5vw] bg-white rounded-full cursor-pointer UserProfil" alt="" />
-                        </div>
-                    ) :(
-                        <img src={`http://localhost:8000/upload/users/${User.photo}`} className="w-[5vw] h-[5vw] bg-white rounded-full cursor-pointer UserProfil" alt="" />
-                    )}
                     <h3 className="text-[1.3vw] text-cyan-600  font-bold">{User.prenom}</h3>
                     {User.email === "Administrateur@gmail.com" ? (
                         <div className="w-full flex  justify-start gap-[1vw] items-center h-[2vw] border-[.1vw] border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-cyan-700 hover:border-0 DIV">
-                            <LayoutDashboard className="text-black Logout" />
-                            <Link to={"/Dashboard"} className="text-black text-[1vw] Deconnexion">Dashboard</Link>
+                            <Home className="text-black Logout" />
+                            <Link to={"/"} className="text-black text-[1vw] Deconnexion">Accueil</Link>
                         </div>
                     ) : ""}
                 </div>
@@ -52,4 +44,4 @@ function ModalMenu({ User }) {
     )
 }
 
-export default ModalMenu;
+export default ModalUserDashboard;

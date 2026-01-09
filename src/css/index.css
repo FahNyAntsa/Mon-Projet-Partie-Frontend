@@ -17,8 +17,23 @@
   font-family:inscription;
   src: url(../font/Poppins-Medium.ttf);
 }
+#SectionAjout{
+  content: "";
+  top: 0;
+  left: 0;
+  /* background: #000000a9; */
+  width: 100%;
+  /* z-index: 999999999999; */
+  height: 100%;
+  position: relative;
+}
 body{
   overflow-x: hidden;
+}
+.IconDashboard{
+  width: 4vw !important;
+  height: 2.5vw;
+  color: white;
 }
 button{
   font-family: inscription;
@@ -142,6 +157,16 @@ p{
 }
 .DIV:hover .Deconnexion{
   color: white;
+}
+.Bienvenu{
+  backdrop-filter: blur(.2vw);
+  background: rgba(255, 255, 255, 0.233);
+}
+#SignInSection{
+  background: url(../assets/DrumsStudio.jpg);
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(1);
 }
 #SignInSection .formulaire #formSignIn #inscription{
   font-family:inscription ;
