@@ -28,12 +28,12 @@ function SignIn() {
             console.log(response.data)
             if(response.data.status === 200){
                 const Inscription = toast.loading("Inscription en cours...",{duration:1700})
-                toast.success(response.data.message,{Inscription})
+                toast.success("inscription réussite",{Inscription})
                 setTimeout(()=>{
                     Navigate("/Login")
                 },2000)
             }else if(response.data.status === 401){
-                toast.error(response.data.message)
+                toast.error("L'email a déjà un compte")
             }
         } catch (error) {
             console.log(error)

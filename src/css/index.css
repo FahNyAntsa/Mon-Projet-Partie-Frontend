@@ -2,6 +2,7 @@
 @plugin "daisyui"{
   themes : night;
 }
+
 @font-face {
   font-family:inscription;
   src: url(../font/Poppins-Medium.ttf);
@@ -17,6 +18,9 @@
   font-family:inscription;
   src: url(../font/Poppins-Medium.ttf);
 }
+/* [html{
+  scrollbar-gutter: stable !important;
+}] */
 #SectionAjout{
   content: "";
   top: 0;

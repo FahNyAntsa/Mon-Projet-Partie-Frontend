@@ -57,7 +57,7 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                         <SearchIcon className={`Usercircle cursor-pointer absolute right-[8.6vw] z-30 ${InputSearch ? " z-30 right-[8.6vw] text-black" : " text-white transition-all"}`} onClick={handleSearchClick} />
                         {InputSearch && <X className="text-black absolute left-[-48.7vw] top-[0.3vw] z-40 cursor-pointer X" onClick={() => { setInputSearch(false), fetchDrumData(), setSearch(""), fetchAccessoriesOneData() }} />}
 
-                        <input type="text" placeholder="Rechecher un produit..." className={`absolute left-[-49vw] w-[48vw]! h-[3vw]! text-black top-[-0.3vw] text-[1vw] Input ${InputSearch ? "opacity-100" : "opacity-0 cursor-default"}`} onChange={HandleSearch} ref={InputFocusRef} value={Search} />
+                        <input type="text" placeholder="Rechecher un produit..." className={`absolute left-[-49vw] w-[48vw]! h-[3vw]! text-black top-[-0.3vw] text-[1vw] Input ${InputSearch ? "opacity-100" : "opacity-0 cursor-default"}`} onChange={(e)=>HandleSearch(e.target.value)} ref={InputFocusRef} value={Search} />
                         <Link to={"/Panier"}>
                             {status ? (status.length === 0 ? <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} /> : <div className="indicator">
                                 <span className="indicator-item badge badge-xs badge-error">{status.length}</span>

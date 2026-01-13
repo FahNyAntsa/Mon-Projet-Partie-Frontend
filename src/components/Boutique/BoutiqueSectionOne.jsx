@@ -67,11 +67,11 @@ function Boutique() {
             console.log(error)
         }
     }
-    const HandleSearch = (e) => {
-        setSearch(e.target.value)
+    const HandleSearch = (value) => {
+        setSearch(value)
         // fetchAllAccessoriesData()
         // const fetchAllAccessoriesData = () => {
-        fetch(`http://localhost:8000/Accessories?accessoire=${e.target.value}&page=${page}&limit=8`)
+        fetch(`http://localhost:8000/Accessories?accessoire=${value}&page=${page}&limit=8`)
             .then(res => res.json())
             .then(SearchData => {
                 // console.log(SearchData.SearchResponse)
@@ -80,6 +80,9 @@ function Boutique() {
                 // const Accessories = SearchData.SearchResponse.filter(d => d.category === "accessoriesOne" || d.category === "accessoriesTwo")
                 setDrumData(Drum)
                 setAccessoriesOne(Accessories)
+                if(value === ""){
+                    fetchAccessoriesOneData()
+                }
             })
             .catch(err => console.log(err))
         // }
@@ -123,7 +126,7 @@ function Boutique() {
                                         <p className="text-[.8vw] flex-1 text-white Describes">{drum.describes}</p>
                                         <Link to={`/Produit/${drum.id}`} className="text-[.9vw] text-white bg-[linear-gradient(90deg,#00c6ff,#0072ff)] px-4 py-[.1vw] rounded-[.2vw] w-full flex justify-center ">Voir le produit</Link>
                                     </div>
-                                    <img src={`../src/assets/images/${drum.pics}`} alt="" className="w-[20vw] image transform hover:scale-[1.1] transition-all duration-300 cursor-pointer" />
+                                    <img src={`http://localhost:8000/upload/products/${drum.pics}`} alt="" className="w-[20vw] image transform hover:scale-[1.1] transition-all duration-300 cursor-pointer" />
                                 </div>
                             </SwiperSlide>
                         ))) : (
@@ -140,7 +143,7 @@ function Boutique() {
                 <div className="flex gap-[4vw] flex-wrap">
                     {AccessoriesOne.length > 0 ? (AccessoriesOne.map(accessories => (
                         <div className="w-[18vw] h-[28vw] bg-[#0B0E14] shadow-[0_0_.2vw_white] shadow-white p-2 flex flex-col gap-2 rounded-[.3vw]" key={accessories.id}>
-                            <img src={`../src/assets/images/${accessories.pics}`} alt="" className="h-1/2 w-full" />
+                            <img src={`http://localhost:8000/upload/products/${accessories.pics}`} alt="" className="h-1/2 w-full" />
                             <div className="flex flex-col gap-2 w-full h-1/2">
                                 <h2 className="text-[1.1vw] text-center text-cyan-600">{accessories.name}</h2>
                                 <p className="text-[.9vw] flex-1 text-white AccessoriesOne text-justify">{accessories.describes}</p>

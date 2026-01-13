@@ -11,6 +11,7 @@ import Panier from './components/Panier'
 import { Toaster } from 'react-hot-toast'
 import Dashboard from './components/Dashboard/Dashboard'
 import DashProduit from './components/Dashboard/DashProduit'
+import DashboardUsers from './components/Dashboard/DashboardUsers'
 
 const Router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const Router = createBrowserRouter([
   {
     path:"/DashProduit",
     element:<DashProduit/>
+  },
+  {
+    path:"/DashboardUsers",
+    element:<DashboardUsers/>
   }
 ])
 function App() {

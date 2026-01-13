@@ -73,7 +73,7 @@ function Produit() {
 
                             <button className={`text-[.9vw] text-white px-4 py-[.1vw] rounded-[.2vw] w-full flex justify-center items-center gap-2 ${Added ? "bg-[#0de70dee]" : "bg-[linear-gradient(90deg,#00c6ff,#0072ff)]"}`} onClick={() => HandleClick(ProductInfo.id)}>{Added && <CheckCircle className="CheckCircle" />}{Added ? "Produit ajouté" : "Ajouter au panier"}</button>
                         </div>
-                        <img src={`../src/assets/images/${ProductInfo.pics}`} alt="" className="w-[35vw] image cursor-pointer" />
+                        <img src={`http://localhost:8000/upload/products/${ProductInfo.pics}`} alt="" className="w-[35vw] image cursor-pointer" />
                     </div>
                 </div>
             </section>

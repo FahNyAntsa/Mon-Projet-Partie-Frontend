@@ -12,8 +12,8 @@ function Dashboard() {
     const [modalOpen, setModalOpen] = useState(false)
     const [User, setUser] = useState()
     const [DataCommand, setDataCommand] = useState([])
-    const [DataUser,setDataUser]=useState([])
-    const [DataProducts,setDataProducts]=useState([])
+    const [DataUser, setDataUser] = useState([])
+    const [DataProducts, setDataProducts] = useState([])
     const navigate = useNavigate()
     const handleClick = () => {
         setModalOpen(true)
@@ -54,7 +54,7 @@ function Dashboard() {
     }
     const TousLesUtilisateurs = async () => {
         try {
-            const response = await axios.get("http://localhost:8000/AllUser", { withCredentials: true })
+            const response = await axios.get("http://localhost:8000/Utilisateurs", { withCredentials: true })
             // console.log(response.data)
             setDataUser(response.data)
         } catch (error) {
@@ -75,29 +75,29 @@ function Dashboard() {
                         <img src="../src/assets/unnamed-removebg-preview.png" className=" w-full object-cover  h-[10vw] rounded-full" alt="" />
                     </div>
                     <div className="flex flex-col gap-[1vw] px-[1vw]">
-                        <div className= {`flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-red-500 hover:border-0 DIV cursor-pointer ${path==="/Dashboard" ? "bg-red-500" :""}`}>
-                            <LayoutDashboard className="Logout" />
-                            <Link className="text-[1.1vw]!" to={"/Dashboard"}>Tableau de bord</Link>
-                        </div>
+                        <button className={`flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-red-500 hover:border-0 DIV transition-colors w-full cursor-pointer ${path === "/Dashboard" ? "bg-red-500 text-white" : ""}`}>
+                            <LayoutDashboard className="Logout hover:text-white" />
+                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[.9vw] hover:text-white" to={"/Dashboard"}>Tableau de bord</Link>
+                        </button>
                         <hr />
-                        <div className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-blue-500 hover:border-0 DIV cursor-pointer">
-                            <Store className="Logout" />
-                            <Link className="text-[1.1vw]!" to={"/DashProduit"}>Produits</Link>
-                        </div>
+                        <button className={`flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-blue-500 hover:border-0 DIV transition-colors cursor-pointer w-full `}>
+                            <Store className="Logout hover:text-white" />
+                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[-1.3vw] hover:text-white" to={"/DashProduit"}>Produits</Link>
+                        </button>
                         <hr />
-                        <div className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-amber-600 hover:border-0 DIV cursor-pointer">
-                            <UsersIcon className="Logout" />
-                            <Link className="text-[1.1vw]!">Utilisateurs</Link>
-                        </div>
+                        <button className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-amber-600 hover:border-0 DIV transition-colors cursor-pointer w-full ">
+                            <UsersIcon className="Logout hover:text-white" />
+                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[-0.5vw] hover:text-white" to={"/DashboardUsers"}>Utilisateurs</Link>
+                        </button>
                         <hr />
-                        <div className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-green-600 hover:border-0 DIV cursor-pointer">
-                            <TrendingUpIcon className="Logout" />
-                            <Link className="text-[1.1vw]!">Revenus</Link>
-                        </div>
+                        <button className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-green-600 hover:border-0 DIV transition-colors cursor-pointer">
+                            <TrendingUpIcon className="Logout hover:text-white" />
+                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[-1.1vw] hover:text-white">Revenus</Link>
+                        </button>
                     </div>
 
                 </div>
-                <div className="pl-[17vw] pr-[2vw] w-full bg-[#0B0E14] h-[4.5vw] flex justify-between items-center z-30">
+                <div className="pl-[17vw] pr-[2vw] w-full bg-[#0f1520] h-[4.5vw] flex justify-between items-center z-30">
                     <h1 className="text-[1.4vw]">Tableau de bord</h1>
                     <div className="flex items-center gap-[1vw]">
                         <div className="indicator">
@@ -105,9 +105,9 @@ function Dashboard() {
                             <BellIcon />
                         </div>
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-[#ffffff2f] w-auto rounded-[2vw] px-[1vw]">
-                            <img src="../src/assets/zoky-lunette.png" className="w-[3vw] h-[3vw] rounded-full" alt="" />
+                            <img src={`http://localhost:8000/upload/users/${User?User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
                             <div>
-                                <h1>Admin</h1>
+                                <h1>{User?User.prenom : ""}</h1>
                                 <span className="badge badge-xs badge-warning">Admin</span>
                             </div>
                             {modalOpen ? <ChevronUp className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <ChevronDown className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
@@ -144,7 +144,7 @@ function Dashboard() {
                         <Charts DataCommand={DataCommand} />
                     </div>
                     <div>
-                        <ChartsArea DataUser={DataUser}/>
+                        <ChartsArea DataUser={DataUser} />
                     </div>
                 </div>
             </section>
