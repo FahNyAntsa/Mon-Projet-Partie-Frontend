@@ -31,7 +31,7 @@ function ModalAjoutUser({ ClickAjout, ProductAdded,TousLesUtilisateurs }) {
             setTimeout(() => {
                 ClickAjout()
             }, 200)
-            // TousLesUtilisateurs()
+            TousLesUtilisateurs()
         } catch (error) {
             console.log(error)
         }

@@ -7,6 +7,7 @@ import axios from "axios";
 import ModalAjoutUser from "./ModalAjoutUser";
 import ModalModifierUser from "./ModalModifierUsers";
 import ConfirmationModal from "./ConfirmationModal";
+import Notification from "./Notification";
 
 
 
@@ -131,10 +132,7 @@ function DashboardUsers() {
                         {ModifierOpen && <ModalModifierUser TousLesUtilisateurs={TousLesUtilisateurs} id={id} ClickModifier={ClickModifier} />}
                     </div>
                     <div className="flex items-center gap-[1vw]">
-                        <div className="indicator">
-                            <span className="indicator-item badge badge-xs badge-error">2</span>
-                            <BellIcon />
-                        </div>
+                        <Notification/>
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-[#ffffff2f] w-auto rounded-[2vw] px-[1vw]">
                             <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
                             <div>

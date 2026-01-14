@@ -1,10 +1,12 @@
 import axios from "axios";
 import { BellIcon, ChevronDown, ChevronUp, LayoutDashboard, Store, TrendingUpIcon, UsersIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client"
 import ModalUserDashboard from "./ModalUserDashboard";
 import { data, Link, useNavigate } from "react-router-dom";
 import Charts from "./Charts";
 import ChartsArea from "./ChartsArea";
+import Notification from "./Notification";
 
 function Dashboard() {
     const path = window.location.pathname
@@ -14,7 +16,9 @@ function Dashboard() {
     const [DataCommand, setDataCommand] = useState([])
     const [DataUser, setDataUser] = useState([])
     const [DataProducts, setDataProducts] = useState([])
+
     const navigate = useNavigate()
+    // 
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -61,6 +65,7 @@ function Dashboard() {
             console.log(error)
         }
     }
+  
     useEffect(() => {
         fetchDrumData()
         TousLesProduits()
@@ -100,14 +105,11 @@ function Dashboard() {
                 <div className="pl-[17vw] pr-[2vw] w-full bg-[#0f1520] h-[4.5vw] flex justify-between items-center z-30">
                     <h1 className="text-[1.4vw]">Tableau de bord</h1>
                     <div className="flex items-center gap-[1vw]">
-                        <div className="indicator">
-                            <span className="indicator-item badge badge-xs badge-error">2</span>
-                            <BellIcon />
-                        </div>
+                        <Notification />
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-[#ffffff2f] w-auto rounded-[2vw] px-[1vw]">
-                            <img src={`http://localhost:8000/upload/users/${User?User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
+                            <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
                             <div>
-                                <h1>{User?User.prenom : ""}</h1>
+                                <h1>{User ? User.prenom : ""}</h1>
                                 <span className="badge badge-xs badge-warning">Admin</span>
                             </div>
                             {modalOpen ? <ChevronUp className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <ChevronDown className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}

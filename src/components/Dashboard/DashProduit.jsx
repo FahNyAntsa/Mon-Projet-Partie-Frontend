@@ -7,6 +7,7 @@ import Charts from "./Charts";
 import ChartsArea from "./ChartsArea";
 import ModalAjoutPanier from "./ModalAjoutPanier";
 import ModalDeConfirmation from "./ModalDeConfirmation";
+import Notification from "./Notification";
 
 function DashProduit() {
     const path = window.location.pathname
@@ -158,10 +159,7 @@ function DashProduit() {
                         {ModalConfirmOpen && <ModalDeConfirmation TousLesProduits={TousLesProduits} ClickDelete={ClickDelete} id={id} />}
                     </div>
                     <div className="flex items-center gap-[1vw]">
-                        <div className="indicator">
-                            <span className="indicator-item badge badge-xs badge-error">2</span>
-                            <BellIcon />
-                        </div>
+                        <Notification/>
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-[#ffffff2f] w-auto rounded-[2vw] px-[1vw]">
                             <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
                             <div>
