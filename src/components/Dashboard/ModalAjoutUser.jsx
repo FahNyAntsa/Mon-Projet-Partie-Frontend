@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function ModalAjoutUser({ ClickAjout, ProductAdded }) {
+function ModalAjoutUser({ ClickAjout, ProductAdded,TousLesUtilisateurs }) {
     const [InputType, setInputType] = useState("password")
     const [IsLock, setIsLock] = useState(false)
     const [On, setOn] = useState(false)
@@ -31,6 +31,7 @@ function ModalAjoutUser({ ClickAjout, ProductAdded }) {
             setTimeout(() => {
                 ClickAjout()
             }, 200)
+            // TousLesUtilisateurs()
         } catch (error) {
             console.log(error)
         }

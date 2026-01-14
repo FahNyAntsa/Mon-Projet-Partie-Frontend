@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import ModalAjoutUser from "./ModalAjoutUser";
 import ModalModifierUser from "./ModalModifierUsers";
+import ConfirmationModal from "./ConfirmationModal";
 
 
 
@@ -81,16 +82,11 @@ function DashboardUsers() {
     // console.log(UserSearch)
 
     const ProductAdded = (produit) => {
-        setDataUser(prev => [produit, ...prev])
+        setUserToMap(prev => [produit, ...prev])
     }
     useEffect(() => {
         fetchDrumData()
         TousLesUtilisateurs()
-        // if (UserSearch) {
-        //     setUserToMap(DataUserSearch)
-        // } else {
-        //     setUserToMap(DataUser)
-        // }
     }, [page])
     const PageNumber = Array.from({ length: TotalPage }, (_, index) => index + 1)
     return (
@@ -130,8 +126,8 @@ function DashboardUsers() {
                             <PlusCircle className="Logout hover:text-green-500" />
                             Ajouter un utilisateur
                         </button>
-                        {AjoutOpen && <ModalAjoutUser ProductAdded={ProductAdded} ClickAjout={ClickAjout} />}
-                        {ModalConfirmOpen && <ModalDeConfirmatio TousLesProduits={TousLesProduits} ClickDelete={ClickDelete} id={id} />}
+                        {AjoutOpen && <ModalAjoutUser TousLesUtilisateurs={TousLesUtilisateurs} ProductAdded={ProductAdded} ClickAjout={ClickAjout} />}
+                        {ModalConfirmOpen && <ConfirmationModal TousLesUtilisateurs={TousLesUtilisateurs} ClickDelete={ClickDelete} id={id} />}
                         {ModifierOpen && <ModalModifierUser TousLesUtilisateurs={TousLesUtilisateurs} id={id} ClickModifier={ClickModifier} />}
                     </div>
                     <div className="flex items-center gap-[1vw]">
@@ -193,7 +189,7 @@ function DashboardUsers() {
                                         <td className=" w-[8vw] ">
                                             <div className="flex gap-4 items-center justify-center ">
                                                 <button className=" text-white text-[1vw] rounded-[.5vw] p-[.2vw]">
-                                                    <Trash2Icon className="Logout text-red-500" onClick={() => { ClickDelete(id) }} />
+                                                    <Trash2Icon className="Logout text-red-500" onClick={() => { ClickDelete(id),setId(user.id) }} />
                                                 </button>
                                                 {user.email === "Administrateur@gmail.com" ? (<button className="  text-white text-[1vw] p-[.2vw] rounded-[.5vw]   z-0" onClick={() => { setModifierOpen(!ModifierOpen), setId(user.id) }}>
                                                     <EditIcon className="Logout text-[#72039eee]" />
