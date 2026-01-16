@@ -1,6 +1,5 @@
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './css/App.css'
 import "./css/index.css"
 import Home from './components/Home/Home'
 import Login from './components/Login'
@@ -60,5 +59,4 @@ function App() {
     </>
   )
 }
-
 export default App

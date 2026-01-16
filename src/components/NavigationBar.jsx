@@ -1,8 +1,18 @@
-import { MenuIcon, SearchIcon, ShoppingCartIcon, UserCircle, X } from "lucide-react";
+import { MenuIcon, Moon, SearchIcon, ShoppingCartIcon, Sun, UserCircle, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import ModalMenu from "./ModalMenu";
+import { useState } from "react";
 
-function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch, setInputSearch, InputFocusRef, HandleSearch, setSearch, Search, fetchAccessoriesOneData, fetchDrumData, User, setModalOpen, status }) {
+function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch, setInputSearch, InputFocusRef, HandleSearch, setSearch, Search, fetchAccessoriesOneData, fetchDrumData, User, setModalOpen, status,notif }) {
+    const [isDark, setIsDark] = useState(false)
+    const DarkMode = () => {
+        setIsDark(true)
+        document.documentElement.classList.toggle("dark")
+    }
+    const LightMode = () => {
+        setIsDark(false)
+        document.documentElement.classList.remove("dark")
+    }
     const path = window.location.pathname
     const handleClickX = () => {
         setModalOpen(false)
@@ -11,7 +21,7 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
     return (
         <>
             <header
-                className="w-full h-[6vw] bg-[#0B0E14] fixed flex justify-between items-center px-[4vw] py-[2vw] border-b-[.1vw] border-[#ffffff1c] z-40"
+                className="w-full h-[6vw] bg-bgFah fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
             >
                 <img
                     src="../src/assets/unnamed-removebg-preview.png" alt=""
@@ -22,30 +32,30 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                         <nav >
                             <ul className={`flex gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
+                                    className={"text-navbar text-[1.1vw] Navlink !transition-colors duration-500 ease-in-out hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
                                     to={"/"}
                                 >
                                     Accueil
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] !transition-colors duration-500 ease-in-out Navlink hover:text-[#00b7ff] flex gap-1"}
                                     id={path === "/Boutique" ? "active" : ""}
                                     to={"/Boutique"}
                                 >
                                     Boutique
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] !transition-colors duration-500 ease-in-out Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Paiement
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] !transition-colors duration-500 ease-in-out Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     A propos
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] !transition-colors duration-500 ease-in-out Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Contact
                                 </NavLink>
@@ -53,22 +63,20 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                             </ul>
                         </nav>
                     </div>
-                    <div className="flex gap-6 relative">
-                        <SearchIcon className={`Usercircle cursor-pointer absolute right-[8.6vw] z-30 ${InputSearch ? " z-30 right-[8.6vw] text-black" : " text-white transition-all"}`} onClick={handleSearchClick} />
-                        {InputSearch && <X className="text-black absolute left-[-48.7vw] top-[0.3vw] z-40 cursor-pointer X" onClick={() => { setInputSearch(false), fetchDrumData(), setSearch(""), fetchAccessoriesOneData() }} />}
+                    <div className="flex gap-[1.2vw] relative ">
+                        <SearchIcon className={`Usercircle cursor-pointer absolute right-[8vw] z-30 ${InputSearch ? " z-30 right-[8.6vw] text-bgFah" : " text-navbar transition-all"}`} onClick={handleSearchClick} />
+                        {InputSearch && <X className="text-bgFah absolute left-[-43.5vw] top-[0.4vw] z-40 cursor-pointer X" onClick={() => { setInputSearch(false), fetchDrumData(), setSearch(""), fetchAccessoriesOneData() }} />}
 
-                        <input type="text" placeholder="Rechecher un produit..." className={`absolute left-[-49vw] w-[48vw]! h-[3vw]! text-black top-[-0.3vw] text-[1vw] Input ${InputSearch ? "opacity-100" : "opacity-0 cursor-default"}`} onChange={(e)=>HandleSearch(e.target.value)} ref={InputFocusRef} value={Search} />
+                        <input type="text" placeholder="Rechecher un produit..." className={`absolute left-[-44vw] !w-[43.5vw] bg-bgInput !h-[3vw] text-bgFah top-[-.2vw] text-[1vw] Input ${InputSearch ? "opacity-100" : "opacity-0 cursor-default"}`} onChange={(e) => HandleSearch(e.target.value)} ref={InputFocusRef} value={Search} />
                         <Link to={"/Panier"}>
-                            {status ? (status.length === 0 ? <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} /> : <div className="indicator">
-                                <span className="indicator-item badge badge-xs badge-error">{status.length}</span>
-                                <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
-                            </div>):(<ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />)}
+                            {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} /> : <div className="indicator">
+                                <span className="indicator-item badge badge-xs badge-error">{notif}</span>
+                                <ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
+                            </div>) : (<ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />)}
                         </Link>
-                        {/* <MenuIcon className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} /> */}
-                        {modalOpen ? <X className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <UserCircle className="text-white Usercircle cursor-pointer" onClick={handleClick} />}
+                        {modalOpen ? <X className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <UserCircle className="text-navbar Usercircle cursor-pointer" onClick={handleClick} />}
                         {modalOpen && <ModalMenu User={User} />}
-                        <p></p>
-
+                        {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} />:<Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} /> }
                     </div>
                 </div>
             </header>

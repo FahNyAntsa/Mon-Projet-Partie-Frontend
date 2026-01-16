@@ -1,52 +1,62 @@
-import { ShoppingCartIcon, UserCircle, X } from "lucide-react";
+import { Moon, ShoppingCartIcon, Sun, UserCircle, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import ModalMenu from "../ModalMenu";
+import { useState } from "react";
 
-function HomeNavigationBarUsers({ handleClick, modalOpen,User,setModalOpen,InputSearch }) {
+function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, InputSearch, notif }) {
     const path = window.location.pathname
     // console.log(User)
     // console.log(path);
-    const handleClickX=()=>{
+    const [isDark, setIsDark] = useState(false)
+    const DarkMode = () => {
+        setIsDark(true)
+        document.documentElement.classList.toggle("dark")
+    }
+    const LightMode = () => {
+        setIsDark(false)
+        document.documentElement.classList.remove("dark")
+    }
+    const handleClickX = () => {
         setModalOpen(false)
     }
     return (
         <>
             <header
-                className="w-full h-[6vw] bg-[#0B0E14] fixed flex justify-between items-center px-[4vw] py-[2vw] border-b-[.1vw] border-[#ffffff1c] z-40"
+                className="w-full h-[6vw] bg-bgFah fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
             >
                 <img
                     src="../src/assets/unnamed-removebg-preview.png" alt=""
-                    className="w-[5vw] h-[5vw] bg-white rounded-full cursor-pointer"
+                    className="w-[5vw] h-[5vw] bg-white rounded-full cursor-pointer border-border border-[.1vw]"
                 />
                 <div className="flex justify-between gap-[3vw] w-[50vw] items-center">
                     <div>
                         <nav >
                             <ul className={`flex gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
+                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
                                     to={"/"}
                                 >
                                     Accueil
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                     id={path === "/Boutique" ? "active" : ""}
                                     to={"/Boutique"}
                                 >
                                     Boutique
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Paiement
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     A propos
                                 </NavLink>
                                 <NavLink
-                                    className={"text-white text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Contact
                                 </NavLink>
@@ -54,13 +64,16 @@ function HomeNavigationBarUsers({ handleClick, modalOpen,User,setModalOpen,Input
                             </ul>
                         </nav>
                     </div>
-                    <div className="flex gap-6 relative">
+                    <div className="flex gap-[1.2vw] relative">
                         <Link to={"/Panier"}>
-                            <ShoppingCartIcon className="text-white Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
+                            {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} /> : <div className="indicator">
+                                <span className="indicator-item badge badge-xs badge-error">{notif}</span>
+                                <ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
+                            </div>) : (<ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />)}
                         </Link>
-                        {modalOpen?<X className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX}/>:<UserCircle className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
+                        {modalOpen ? <X className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <UserCircle className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
                         {modalOpen && <ModalMenu User={User} />}
-                        <p className="text-black text-[1.1vw] mt-2"></p>
+                        {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} />}
                     </div>
                 </div>
             </header>

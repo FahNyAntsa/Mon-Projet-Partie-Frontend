@@ -1,12 +1,58 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @plugin "daisyui"{
   themes : night;
 }
+@layer base{
+  :root{
+    --fond:#f3eeee;
+    --text_navbar:#0B0E14;
+    --bgInput:#0B0E14;
+    --border:#0b0e14a8;
+    --shadow:#0505053b;
+    --shadowBox:#0505056b;
+    --tableBorder:#0b0e1442;
+    --textH1:#707070;
+    --paragraphe:#707070;
+    --Mybg:#a5a5a5;
+    --text:#0B0E14;
+    --modal:#00000048;
+    --sidebar:#a8a8a8;
+    --topbar:#ffffff;
+    --borderuser:#00000021;
+    --textsidebar:#FFFF;
+  }
+  *{
+    @apply transition-all duration-300 ease-in-out
+  }
+}
+.dark{
+  --textsidebar:#FFFF;
+  --borderuser:#ffffff2f;
+  --topbar:#121629;
+  --sidebar:#0f1620;
+  --text:#ffffff;
+  --Mybg:#11131d;
+  --paragraphe:#c2c2c2;
+  --bgInput:#ffffff;
+  --textH1:#cccccc;
+  --tableBorder:#e2e6ee42;
+  --shadow:#ffffff2a;
+  --shadowBox:#ffffff2a;
+  --border:#ffffff1c;
+  --text_navbar:rgb(255, 255, 255);
+  --fond:#0B0E14;
+  --modal:#ffffff21;
+}
+
 
 @font-face {
   font-family:inscription;
   src: url(../font/Poppins-Medium.ttf);
 }
+
 @font-face {
   font-family:font P;
   src: url(../font/Inter-Italic-VariableFont_opsz\,wght.ttf);
@@ -59,6 +105,7 @@ button{
 }
 .Usercircle:hover{
   color: #00b7ff;
+  transition: all .1s ease-in-out !important;
 }
 .Star{
   width: 1.2vw;

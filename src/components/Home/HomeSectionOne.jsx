@@ -8,6 +8,8 @@ function HomeSectionOne() {
     const [modalOpen, setModalOpen] = useState(false)
     const [User, setUser] = useState()
     const [InputSearch, setInputSearch] = useState(false)
+    const [notif,setNotif]=useState(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
+
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -34,7 +36,7 @@ function HomeSectionOne() {
     // console.log(User)
     return (
         <>
-            {User ? <HomeNavigationBarUsers modalOpen={modalOpen} setModalOpen={setModalOpen} handleClick={handleClick} User={User} /> : <HomeNavigationBar />}
+            {User ? <HomeNavigationBarUsers notif={notif} modalOpen={modalOpen} setModalOpen={setModalOpen} handleClick={handleClick} User={User} /> : <HomeNavigationBar />}
             <section
                 className="w-full h-screen flex justify-center items-center flex-col gap-9" id="SignInSection"
                 onClick={() => { setInputSearch(false) }}

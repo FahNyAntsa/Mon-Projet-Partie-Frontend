@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BellIcon, ChevronDown, ChevronUp, EditIcon, LayoutDashboard, PlusCircle, Search, SquareArrowLeftIcon, SquareArrowRightIcon, Star, Store, Trash2Icon, TrendingUpIcon, UsersIcon } from "lucide-react";
+import { BellIcon, ChevronDown, ChevronUp, EditIcon, LayoutDashboard, Moon, PlusCircle, Search, SquareArrowLeftIcon, SquareArrowRightIcon, Star, Store, Sun, Trash2Icon, TrendingUpIcon, UsersIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import ModalUserDashboard from "./ModalUserDashboard";
 import { data, Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import ChartsArea from "./ChartsArea";
 import ModalAjoutPanier from "./ModalAjoutPanier";
 import ModalDeConfirmation from "./ModalDeConfirmation";
 import Notification from "./Notification";
+import Sidebars from "./Sidebars";
 
 function DashProduit() {
     const path = window.location.pathname
@@ -26,6 +27,15 @@ function DashProduit() {
     const [id, setId] = useState(0)
     const [UpdateCategory, setUpdateCategory] = useState("")
     const navigate = useNavigate()
+    const [isDark, setIsDark] = useState(false)
+    const DarkMode = () => {
+        setIsDark(true)
+        document.documentElement.classList.toggle("dark")
+    }
+    const LightMode = () => {
+        setIsDark(false)
+        document.documentElement.classList.remove("dark")
+    }
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -121,36 +131,11 @@ function DashProduit() {
     const PageNumber = Array.from({ length: NombreTotalDePage }, (_, index) => index + 1)
     return (
         <>
-            <section className="relative" id="">
-                <div className="w-[15vw] h-screen bg-[#192336] absolute pt-[2vw] flex flex-col gap-[3vw] ">
-                    <div className="w-[10vw] h-[10vw] bg-[#FFFF] ml-[2.3vw]! rounded-full">
-                        <img src="../src/assets/unnamed-removebg-preview.png" className=" w-full object-cover  h-[10vw] rounded-full" alt="" />
-                    </div>
-                    <div className="flex flex-col gap-[1vw] px-[1vw]">
-                        <button className={`flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-red-500 hover:border-0 DIV transition-colors w-full cursor-pointer`}>
-                            <LayoutDashboard className="Logout hover:text-white" />
-                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[.9vw] hover:text-white" to={"/Dashboard"}>Tableau de bord</Link>
-                        </button>
-                        <hr />
-                        <button className={`flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-blue-500 hover:border-0 DIV transition-colors cursor-pointer w-full ${path === "/DashProduit" ? "bg-blue-500 text-white" : ""}`}>
-                            <Store className="Logout hover:text-white" />
-                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[-1.3vw] hover:text-white">Produits</Link>
-                        </button>
-                        <hr />
-                        <button className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-amber-600 hover:border-0 DIV transition-colors cursor-pointer w-full ">
-                            <UsersIcon className="Logout hover:text-white" />
-                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[-0.5vw] hover:text-white" to={"/DashboardUsers"}>Utilisateurs</Link>
-                        </button>
-                        <hr />
-                        <button className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[3vw] px-1 relative hover:bg-green-600 hover:border-0 DIV transition-colors cursor-pointer">
-                            <TrendingUpIcon className="Logout hover:text-white" />
-                            <Link className="text-[1.1vw]! w-full h-full absolute top-2 left-[-1.1vw] hover:text-white">Revenus</Link>
-                        </button>
-                    </div>
-                </div>
-                <div className="pl-[17vw] pr-[2vw] w-full bg-[#0f1520] h-[4.5vw] flex justify-between items-center z-30">
+            <section className="relative bg-bgFah h-screen" id="">
+                <Sidebars/>
+                <div className="pl-[17vw] pr-[2vw] w-full bg-topbar h-[4.5vw] flex justify-between items-center z-30 shadow shadow-shadowBox">
                     <div className="flex items-center gap-[1vw]">
-                        <h1 className="text-[1.4vw]">Produits</h1>
+                        <h1 className="text-[1.4vw] text-navbar">Produits</h1>
                         <button className="flex text-[.8vw] gap-[.5vw] text-white bg-green-500 items-center p-[.2vw] rounded-[1vw] hover:bg-[#FFFF] hover:text-green-500 transition-colors " onClick={ClickAjout}>
                             <PlusCircle className="Logout hover:text-green-500" />
                             Ajouter un produit
@@ -158,44 +143,45 @@ function DashProduit() {
                         {AjoutOpen && <ModalAjoutPanier ProductAdded={ProductAdded} ClickAjout={ClickAjout} />}
                         {ModalConfirmOpen && <ModalDeConfirmation TousLesProduits={TousLesProduits} ClickDelete={ClickDelete} id={id} />}
                     </div>
-                    <div className="flex items-center gap-[1vw]">
-                        <Notification/>
-                        <div className="flex items-center gap-[1vw] border-[.1vw] border-[#ffffff2f] w-auto rounded-[2vw] px-[1vw]">
+                    <div className="flex items-center gap-[.5vw]">
+                        {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} />}
+                        <Notification />
+                        <div className="flex items-center gap-[1vw] border-[.1vw] border-borderuser w-auto rounded-[2vw] px-[1vw]">
                             <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
                             <div>
-                                <h1>{User ? User.prenom : ""}</h1>
+                                <h1 className="text-navbar">{User ? User.prenom : ""}</h1>
                                 <span className="badge badge-xs badge-warning">Admin</span>
                             </div>
-                            {modalOpen ? <ChevronUp className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <ChevronDown className="text-white Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
+                            {modalOpen ? <ChevronUp className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <ChevronDown className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
                             {/* <ChevronDown className="cursor-pointer" onClick={handleClick} /> */}
                             {modalOpen && <ModalUserDashboard User={User} />}
                         </div>
                     </div>
                 </div>
-                <div className="  ml-[25vw]! absolute top-[1vw] right-[32vw] w-[20vw]">
-                    <input type="search" className="w-[20vw]! ml-[25vw] absolute  text-white text-[1vw] bg-[#0f1520]! border-[.1vw]! border-[#ffffff60]! pr-[.5vw]!" placeholder="Rechecher un produit..." onChange={(e) => handleSearch(e.target.value)} />
-                    <Search className="absolute Logout top-[.3vw] left-[.5vw]" />
+                <div className="  ml-[25vw] relative top-[-3.5vw] right-[7vw] w-[20vw]">
+                    <input type="search" className="w-[20vw]! ml-[25vw] absolute bg-bgFah  text-navbar text-[1vw] bg-[#0f1520]! border-[.1vw]! border-[#ffffff60]! pr-[.5vw]!" placeholder="Rechecher un produit..." onChange={(e) => handleSearch(e.target.value)} />
+                    <Search className="absolute Logout top-[.4vw] right-[-7vw] text-navbar " />
                 </div>
-                <div className="flex items-center pl-[16vw] justify-center pt-[2vw]">
-                    <div className="overflow-x rounded-box bg-[#171c27] border h-auto border-base-content/8 w-[60vw] ml-[24vw]">
+                <div className="flex  justify-center pt-[2vw] -z-20">
+                    <div className="overflow-x rounded-box ml-[14vw] shadow shadow-shadowBox bg-bgFah  h-auto border-base-content/8 w-[80vw] ">
                         <table className="table">
                             <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Prix</th>
-                                    <th>Image</th>
-                                    <th>Action</th>
+                                <tr className="border-none">
+                                    <th className="text-Th">Nom</th>
+                                    <th className="text-Th">Prix</th>
+                                    <th className="text-Th">Image</th>
+                                    <th className="text-Th !z-20">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {(DataProducts.map((p, index) => (
-                                    <tr key={index}>
-                                        <td className=" w-[20vw] align-middle">
+                                    <tr key={index} className="border-none">
+                                        <td className=" w-[20vw] align-middle text-Th">
                                             {p.name}
                                         </td>
-                                        <td>{p.Price.toLocaleString('fr-FR')} ariary</td>
+                                        <td className="text-para">{p.Price.toLocaleString('fr-FR')} ariary</td>
                                         <td>
-                                            <div className=" w-[8vw] h-[5vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                            <div className=" w-[8vw] h-[5vw]  rounded-[.5vw] overflow-hidden bg-blue-500 shadow shadow-shadow ">
                                                 {/* <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" /> */}
                                                 <img src={`http://localhost:8000/upload/products/${p.pics} `} className="w-full h-full" alt="" />
                                             </div>
@@ -241,15 +227,15 @@ function DashProduit() {
                         </dialog>
                     </div>
                 </div>
-                <div className="pl-[47vw] flex gap-[1vw] pt-[1vw]">
+                <div className="pl-[43vw] flex gap-[1vw] pt-[1vw]">
                     <button onClick={() => setPage(page - 1)} disabled={page === 1} className={page === 1 ? "opacity-25" : "opacity-100"}>
-                        <SquareArrowLeftIcon className="Usercircle" />
+                        <SquareArrowLeftIcon className="Usercircle text-para" />
                     </button>
                     {PageNumber.map(nbrPage => (
-                        <button key={nbrPage} id={page === nbrPage ? "active" : ""} onClick={() => setPage(nbrPage)} className="text-[1vw]">{nbrPage}</button>
+                        <button key={nbrPage} id={page === nbrPage ? "active" : ""} onClick={() => setPage(nbrPage)} className="text-[1vw] text-para">{nbrPage}</button>
                     ))}
                     <button onClick={() => setPage(page + 1)} disabled={page === 12} className={page === 12 ? "opacity-25" : "opacity-100"}>
-                        <SquareArrowRightIcon className="Usercircle" />
+                        <SquareArrowRightIcon className="Usercircle text-para" />
                     </button>
                 </div>
             </section>

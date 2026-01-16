@@ -21,13 +21,13 @@ function ConfirmationModal({ ClickDelete, id,TousLesUtilisateurs }) {
     }
     return (
         <>
-            <div className="w-full h-screen bg-[#0000008e] flex justify-center items-center top-0 left-0 absolute z-100 ">
-                <div className="w-[25vw] h-[10vw] bg-[#ffffff] p-[2vw] flex justify-start flex-col gap-[1vw]  z-100 rounded-[1vw] relative transition-all" onSubmit={handleSubmit}>
-                    <h1 className="text-[#070b2b] text-[1.2vw]">Voulez-vous vraiment supprimer cette utilisateur ?</h1>
+            <div className="w-full h-screen bg-modal flex z-[999999] justify-center items-center top-0 left-0 absolute z-100 ">
+                <div className="w-[25vw] h-[10vw] bg-bgFah z-[999999] p-[2vw] flex justify-start flex-col gap-[1vw]  z-100 rounded-[1vw] relative transition-all" onSubmit={handleSubmit}>
+                    <h1 className="text-navbar text-[1.2vw]">Voulez-vous vraiment supprimer cette utilisateur ?</h1>
                     {/* <X className="text-black Logout absolute top-[.5vw] right-[.5vw] cursor-pointer hover:text-red-500" onClick={ClickDelete} /> */}
-                    <button className="text-black btn-ghost absolute right-2 top-2 btn btn-sm btn-circle Logout cursor-pointer hover:text-white text-[.8vw] rounded-full p-[1vw]" onClick={ClickDelete}>X</button>
+                    <button className="text-navbar btn-ghost absolute right-2 top-2 btn btn-sm btn-circle Logout cursor-pointer  text-[.8vw] rounded-full p-[1vw]" onClick={ClickDelete}>X</button>
                     <div className="flex justify-between gap-[1vw]">
-                        <button className="border-[.1vw] border-[#0000008e] hover:bg-red-500 transition-colors hover:text-white hover:border-none text-black p-[.5vw] rounded-[.5vw] w-1/2 text-[1vw]" onClick={ClickDelete}>Non</button>
+                        <button className="border-[.1vw] border-border hover:bg-red-500 transition-colors hover:text-white hover:border-none text-navbar p-[.5vw] rounded-[.5vw] w-1/2 text-[1vw]" onClick={ClickDelete}>Non</button>
                         <button className="bg-green-500 w-1/2 hover:bg-white hover:border-[.1vw] hover:border-green-500 hover:text-green-500 transition-colors text-white p-[.5vw] rounded-[.5vw] text-[1vw]" onClick={() => handleDelete(id)}>Oui</button>
                     </div>
                 </div>

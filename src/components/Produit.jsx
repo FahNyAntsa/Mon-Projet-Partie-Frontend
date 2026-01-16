@@ -37,14 +37,10 @@ function Produit() {
         setAdded(true)
         try {
             const Tab = JSON.parse(localStorage.getItem("ProduitDansPanier")) || []
-            // const response = await axios.post(`http://localhost:8000/Product/${id}`, {}, { withCredentials: true })
-            // console.log(response.data)
             Tab.push(ProductInfo)
-            // console.log(Tab)
-            // console.log(ProductInfo)
             localStorage.setItem("ProduitDansPanier",JSON.stringify(Tab))
             setTimeout(() => {
-                navigate("/Panier")
+                navigate("/Boutique")
             }, 500);
         } catch (error) {
             console.log(error)
@@ -55,12 +51,12 @@ function Produit() {
 
     return (
         <>
-            <section className="w-full h-screen  flex flex-col ">
-                <div className="w-full h-screen flex justify-center items-center ">
-                    <div className="bg-[#ffffff] relative  w-[60vw] h-[35vw] rounded-[1vw] p-[2vw] flex overflow-hidden gap-1">
-                        <Link to={"/Boutique"}><X className="absolute right-2 top-2 text-black" /></Link>
+            <section className="w-full h-screen bg-bgFah  flex flex-col ">
+                <div className="w-full h-screen flex justify-center  items-center ">
+                    <div className="bg-bgFah relative  w-[60vw] shadow shadow-shadowBox h-[35vw] rounded-[1vw] p-[2vw] flex overflow-hidden gap-1">
+                        <Link to={"/Boutique"}><X className="absolute right-2 top-2 text-navbar hover:text-cyan-600" /></Link>
                         <div className="w-1/2 p-3 flex flex-col gap-1">
-                            <h1 className="text-[1.5vw] text-black">{ProductInfo.name}</h1>
+                            <h1 className="text-[1.5vw] text-navbar">{ProductInfo.name}</h1>
                             <p className="text-[1.1vw] flex-1 text-gray-500 mt-[2vw]!">{ProductInfo.describes}</p>
                             <div className="flex gap-1">
                                 <Star className="Star" />
@@ -69,7 +65,7 @@ function Produit() {
                                 <Star className="Star" />
                                 <Star className="Star" />
                             </div>
-                            <h1 className="text-[1.3vw] text-cyan-600 flex  items-center gap-2">Prix <span className="text-[1.2vw] text-black">{Price} ariary</span></h1>
+                            <h1 className="text-[1.3vw] text-cyan-600 flex  items-center gap-2">Prix <span className="text-[1.2vw] text-navbar">{Price} ariary</span></h1>
 
                             <button className={`text-[.9vw] text-white px-4 py-[.1vw] rounded-[.2vw] w-full flex justify-center items-center gap-2 ${Added ? "bg-[#0de70dee]" : "bg-[linear-gradient(90deg,#00c6ff,#0072ff)]"}`} onClick={() => HandleClick(ProductInfo.id)}>{Added && <CheckCircle className="CheckCircle" />}{Added ? "Produit ajouté" : "Ajouter au panier"}</button>
                         </div>

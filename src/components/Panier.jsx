@@ -19,6 +19,7 @@ function Panier() {
     const [status, setStatus] = useState([])
     const [isCommand, setIsCommand] = useState(false)
     const [PrixToCommand, setPrixToCommand] = useState("")
+    const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -71,10 +72,13 @@ function Panier() {
             // console.log(response.data)
             setStatus(response.data)
             // console.log(status)
+            setNotif(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
+            console.log(JSON.parse(localStorage.getItem("ProduitDansPanier")))
         } catch (error) {
             console.log(error)
         }
     }
+    // console.log(notif)
     const CancelCommand = (id) => {
         // localStorage.removeItem()
         const Item = JSON.parse(localStorage.getItem("ProduitDansPanier"))
@@ -131,128 +135,128 @@ function Panier() {
                 InputFocusRef={InputFocusRef}
                 setInputSearch={setInputSearch}
                 status={status}
+                notif={notif}
 
             />
-            <section className="h-auto w-full px-[4vw]  pt-[8vw] flex flex-col gap-[3vw]">
-                <h1 className="text-cyan-700 text-5xl text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
-                <div className="overflow-x rounded-box bg-[#171c27] border h-auto border-base-content/8 w-full">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Produit</th>
-                                <th>Prix</th>
-                                <th>Quantité</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {localStorage.getItem("ProduitDansPanier") && (localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
-                                <tr key={index}>
-                                    <td className=" w-[35vw] align-middle">
-                                        <div className="flex items-center w-full justify-center gap-[2vw] h-[8vw]gap-[5vw]">
-                                            <div className=" w-[10vw] h-[7vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
-                                                <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" />
-                                            </div>
-                                            <div className="flex flex-col gap-1 flex-1">
-                                                <h1>{p.name}</h1>
-                                                <p className="text-[.8vw] Description">{p.describes}</p>
-                                                <div className="flex gap-1">
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
+            <section className=" w-full h-screen px-[4vw] bg-bgFah flex flex-col gap-[3vw]">
+                <div className="h-auto w-full px-[4vw] bg-bgFah absolute left-0 mt-[8vw] flex flex-col gap-[3vw]">
+                    <h1 className="text-cyan-700 text-5xl text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
+                    <div className="overflow rounded-[2vw] bg-bgFah  h-auto border-none w-full">
+                        <table className="table-auto table border-none  rounded-box">
+                            <thead>
+                                <tr className="border-none">
+                                    <th className="text-Th text-[1.1vw]">Produit</th>
+                                    <th className="text-Th text-[1.1vw]">Prix</th>
+                                    <th className="text-Th text-[1.1vw]">Quantité</th>
+                                    <th className="text-Th text-[1.1vw]">Status</th>
+                                    <th className="text-Th text-[1.1vw]">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody className="border-none">
+                                {localStorage.getItem("ProduitDansPanier") && (localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
+                                    <tr key={index} className="border-b-[.1vw]">
+                                        <td className=" w-[35vw] align-middle ">
+                                            <div className="flex items-center w-full justify-center gap-[2vw] h-[8vw]gap-[5vw]">
+                                                <div className=" w-[10vw] h-[7vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                                    <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" />
+                                                </div>
+                                                <div className="flex flex-col gap-1 flex-1">
+                                                    <h1 className="text-para">{p.name}</h1>
+                                                    <p className="text-[.8vw] text-para Description">{p.describes}</p>
+                                                    <div className="flex gap-1">
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>{p.Price.toLocaleString("fr-FR")} ariary</td>
-                                    <td>
-                                        {/* <input type="number" className="w-[7vw]! text-[.9vw] text-black p-[1vw]!" min={1} defaultValue={1} placeholder="Entrez..." onChange={(e) => setQuantity(e.target.value)} /> */}
-                                        1
-                                    </td>
-                                    <td>
-                                        <span className="badge badge-warning">
-                                            En attente
-                                        </span>
-                                    </td>
-                                    <td className=" w-[8vw] ">
-                                        <div className="flex gap-4 items-center justify-center ">
-                                            <button className="bg-red-400 text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
-                                            <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
-                                            {/* <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]">{isCommand ? status.map(stat => stat.status) : "commander"}</button> */}
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            ))) : "")}
-                            {(status.map((p, index) => (
-                                <tr key={index}>
-                                    <td className=" w-[35vw] align-middle">
-                                        <div className="flex items-center w-full justify-center gap-[2vw] h-[8vw]gap-[5vw]">
-                                            <div className=" w-[10vw] h-[7vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
-                                                <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" />
+                                        </td>
+                                        <td className="text-para">{p.Price.toLocaleString("fr-FR")} ariary</td>
+                                        <td className="text-para">
+                                            1
+                                        </td>
+                                        <td>
+                                            <span className="badge badge-warning">
+                                                En attente
+                                            </span>
+                                        </td>
+                                        <td className=" w-[8vw] ">
+                                            <div className="flex gap-4 items-center justify-center ">
+                                                <button className="bg-red-400 text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
+                                                <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
                                             </div>
-                                            <div className="flex flex-col gap-1 flex-1">
-                                                <h1>{p.name}</h1>
-                                                <p className="text-[.8vw] Description">{p.describes}</p>
-                                                <div className="flex gap-1">
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
-                                                    <Star className="Star" />
+                                        </td>
+                                    </tr>
+                                ))) : "")}
+                                {(status.map((p, index) => (
+                                    <tr key={index} >
+                                        <td className=" w-[35vw]">
+                                            <div className="flex items-center w-full justify-center gap-[2vw] h-[8vw]gap-[5vw]">
+                                                <div className=" w-[10vw] h-[7vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                                    <img src={`../src/assets/images/${p.pics} `} className="w-full h-full" alt="" />
+                                                </div>
+                                                <div className="flex flex-col gap-1 flex-1">
+                                                    <h1 className="text-para">{p.name}</h1>
+                                                    <p className="text-[.8vw] text-para Description">{p.describes}</p>
+                                                    <div className="flex gap-1">
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                        <Star className="Star" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>{p.price.toLocaleString("fr-FR")} ariary</td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        <span className="badge badge-info">{p.status}</span>
-                                    </td>
-                                    <td className=" w-[8vw] ">
-                                        <div className="flex gap-4 items-center justify-center ">
-                                            <button className="bg-red-400 text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw] opacity-50" disabled>Annuler</button>
-                                            <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw] opacity-50" disabled onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), Commander(p.id), setSelectedProduct(p) }}>Commander</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td className="text-para">{p.price.toLocaleString("fr-FR")} ariary</td>
+                                        <td className="text-para">
+                                            1
+                                        </td>
+                                        <td>
+                                            <span className="badge badge-info">{p.status}</span>
+                                        </td>
+                                        <td className=" w-[8vw] ">
+                                            <div className="flex gap-4 items-center justify-center ">
+                                                <button className="bg-red-400 text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw] opacity-50" disabled>Annuler</button>
+                                                <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw] opacity-50" disabled onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), Commander(p.id), setSelectedProduct(p) }}>Commander</button>
+                                            </div>
+                                        </td>
+                                    </tr>
 
-                            )))}
-                            {localStorage.getItem("ProduitDansPanier") ? (
-                                <tr>
-                                    <th colSpan={5} className="text-center">Total : {Total.toLocaleString("fr-FR")}  ariary</th>
-                                </tr>
-                            ) : (
-                                <tr>
-                                    <th colSpan={5} className="text-center">Total : 0 ariary</th>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                    <dialog id="my_modal_3" className="modal">
-                        <div className="modal-box w-[30vw]! h-[13vw]">
-                            <form method="dialog">
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setPrixToCommand("")}>x</button>
-                            </form>
-                            {SelectedProduct && (
-                                <form action="" className="flex flex-col gap-[.8vw]" onSubmit={(e) => e.preventDefault()}>
-                                    <label htmlFor="Prix" className="text-cyan-700! text-center underline text-[1.5vw]!">Montant</label>
-                                    <div className="flex gap-[1vw] items-center mb-[1vw]! text-[1vw]">
-                                        <input type="number" id="Prix" placeholder="Entrez le montant à payer" className="w-[18vw]! text-black text-[1vw] px-[1vw]!" onChange={(e) => setPrixToCommand(e.target.value)} value={PrixToCommand} required />
-                                        (en Ariary)
-                                    </div>
-                                    <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={(e) => { Payer(e, SelectedProduct.Price, SelectedProduct), fetchCommand() }}>Payer</button>
+                                )))}
+                                {localStorage.getItem("ProduitDansPanier") ? (
+                                    <tr className="border-none">
+                                        <th colSpan={5} className="text-center text-para border-none">Total : {Total.toLocaleString("fr-FR")}  ariary</th>
+                                    </tr>
+                                ) : (
+                                    <tr className="border-none">
+                                        <th colSpan={5} className="text-center text-para border-none">Total : 0 ariary</th>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                        <dialog id="my_modal_3" className="modal bg-modal">
+                            <div className="modal-box w-[30vw]! h-[13vw] bg-bgFah">
+                                <form method="dialog">
+                                    <button className="btn btn-sm text-navbar btn-circle btn-ghost absolute right-2 top-2" onClick={() => setPrixToCommand("")}>x</button>
                                 </form>
-                            )}
-                        </div>
-                    </dialog>
+                                {SelectedProduct && (
+                                    <form action="" className="flex flex-col gap-[.8vw]" onSubmit={(e) => e.preventDefault()}>
+                                        <label htmlFor="Prix" className="!text-cyan-700 text-center underline !text-[1.5vw]">Montant</label>
+                                        <div className="flex gap-[1vw] text-para items-center mb-[1vw]! text-[1vw]">
+                                            <input type="number" id="Prix" placeholder="Entrez le montant à payer" className="!w-[25vw] bg-navbar text-bgFah text-[1vw] px-[1vw]!" onChange={(e) => setPrixToCommand(e.target.value)} value={PrixToCommand} required />
+                                            (en Ariary)
+                                        </div>
+                                        <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={(e) => { Payer(e, SelectedProduct.Price, SelectedProduct), fetchCommand() }}>Payer</button>
+                                    </form>
+                                )}
+                            </div>
+                        </dialog>
+                    </div>
+                    {/* <ChevronDown /> */}
                 </div>
-                {/* <ChevronDown /> */}
             </section>
 
         </>

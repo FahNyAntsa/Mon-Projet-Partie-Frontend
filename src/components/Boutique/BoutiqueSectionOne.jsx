@@ -19,6 +19,7 @@ function Boutique() {
     const [AccessoriesOne, setAccessoriesOne] = useState([])
     const [User, setUser] = useState()
     const [status, setStatus] = useState([])
+    const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -80,7 +81,7 @@ function Boutique() {
                 // const Accessories = SearchData.SearchResponse.filter(d => d.category === "accessoriesOne" || d.category === "accessoriesTwo")
                 setDrumData(Drum)
                 setAccessoriesOne(Accessories)
-                if(value === ""){
+                if (value === "") {
                     fetchAccessoriesOneData()
                 }
             })
@@ -113,8 +114,9 @@ function Boutique() {
                 fetchDrumData={fetchDrumData}
                 setInputSearch={setInputSearch}
                 status={status}
+                notif={notif}
             />
-            <section className="w-full h-auto py-[9vw]  flex flex-col justify-center gap-[3vw]">
+            <section className="w-full h-auto py-[9vw] bg-white  flex flex-col justify-center gap-[3vw]">
                 <h1 className="text-cyan-700 text-5xl text-center font-bold">Batteries</h1>
                 <div className="">
                     <Swiper spaceBetween={10} slidesPerView={2} modules={[Navigation, Pagination]} navigation className="px-[3vw]!" observer={true} observeParents={true}>
@@ -131,42 +133,42 @@ function Boutique() {
                             </SwiperSlide>
                         ))) : (
                             <div className="flex gap-4 justify-center items-center">
-                                <PackageOpenIcon className="PackageOpenIcon text-white" />
-                                <h1 className="text-[1.5vw] text-white">Oups ! l'article n'existe pas en ce moment</h1>
+                                <PackageOpenIcon className="PackageOpenIcon text-black" />
+                                <h1 className="text-[1.5vw] text-black">Oups ! l'article n'existe pas en ce moment</h1>
                             </div>
                         )}
                     </Swiper>
                 </div>
             </section>
-            <section className="w-full h-auto bg-[#0B0E14] relative pt-[12vw] pb-[4vw] pl-[7vw] border-b-[.1vw] border-[#ffffff23] flex flex-col items-center gap-[3vw]">
+            <section className="w-full h-auto bg-bgFah relative pt-[12vw] pb-[4vw] pl-[7vw] border-b-[.1vw] border-[#ffffff23] flex flex-col items-center gap-[3vw]">
                 <h1 className="text-cyan-700 text-5xl text-center top-[4vw] left-[39vw] absolute font-bold">Accessoires</h1>
                 <div className="flex gap-[4vw] flex-wrap">
                     {AccessoriesOne.length > 0 ? (AccessoriesOne.map(accessories => (
-                        <div className="w-[18vw] h-[28vw] bg-[#0B0E14] shadow-[0_0_.2vw_white] shadow-white p-2 flex flex-col gap-2 rounded-[.3vw]" key={accessories.id}>
+                        <div className="w-[18vw] h-[28vw] bg-bgFah shadow-shadowBox shadow  p-2 flex flex-col gap-2 rounded-[.3vw]" key={accessories.id}>
                             <img src={`http://localhost:8000/upload/products/${accessories.pics}`} alt="" className="h-1/2 w-full" />
                             <div className="flex flex-col gap-2 w-full h-1/2">
                                 <h2 className="text-[1.1vw] text-center text-cyan-600">{accessories.name}</h2>
-                                <p className="text-[.9vw] flex-1 text-white AccessoriesOne text-justify">{accessories.describes}</p>
+                                <p className="text-[.9vw] flex-1 text-para AccessoriesOne text-justify">{accessories.describes}</p>
                                 <Link to={`/Produit/${accessories.id}`} className="text-[.9vw] text-white bg-[linear-gradient(90deg,#00c6ff,#0072ff)] px-4 py-[.1vw] rounded-[.2vw] w-full flex justify-center ">Voir le produit</Link>
                             </div>
                         </div>
                     ))) : (
                         <div className="flex w-screen h-[18vw] relative">
                             <div className=" gap-4 items-center justify-between absolute flex left-[27vw]">
-                                <PackageOpenIcon className="PackageOpenIcon text-white" />
-                                <h1 className="text-[1.5vw] text-white flex-1 ">Oups ! l'article n'existe pas en ce moment</h1>
+                                <PackageOpenIcon className="PackageOpenIcon text-navbar" />
+                                <h1 className="text-[1.5vw] text-navbar flex-1 ">Oups ! l'article n'existe pas en ce moment</h1>
                             </div>
                         </div>
                     )}
                 </div>
                 {AccessoriesOne.length > 0 ? (<div className="flex justify-center items-center pr-[7vw] gap-[2vw] w-full h-[2vw]">
-                    <button onClick={() => setPage(page - 1)} disabled={page === 1} className={page === 1 ? "opacity-25" : "opacity-100"}>
+                    <button onClick={() => setPage(page - 1)} disabled={page === 1} className={page === 1 ? "opacity-25" : "opacity-100 text-Th"}>
                         <SquareArrowLeftIcon className="Usercircle" />
                     </button>
                     {Page.map(nbrPage => (
-                        <button key={nbrPage} id={page === nbrPage ? "active" : ""} onClick={() => setPage(nbrPage)} className="text-[1vw]">{nbrPage}</button>
+                        <button key={nbrPage} id={page === nbrPage ? "active" : ""} onClick={() => setPage(nbrPage)} className="text-[1vw] text-Th">{nbrPage}</button>
                     ))}
-                    <button onClick={() => setPage(page + 1)} disabled={page === 6} className={page === 6 ? "opacity-25" : "opacity-100"}>
+                    <button onClick={() => setPage(page + 1)} disabled={page === 6} className={page === 6 ? "opacity-25" : "opacity-100 text-Th"}>
                         <SquareArrowRightIcon className="Usercircle" />
                     </button>
                 </div>) : ""}
