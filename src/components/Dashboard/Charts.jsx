@@ -16,11 +16,11 @@ function Charts({DataCommand}) {
             }}
         >
             <CartesianGrid strokeDasharray={"3 3"}/>
-            <XAxis dataKey={"user_id"}/>
+            <XAxis dataKey={"Price"}/>
             <YAxis width={"auto"}/>
             <Tooltip/>
             <Legend/>
-            <Bar dataKey={"id"} stackId={"a"} fill="#8884d8"/>
+            <Bar dataKey={"Price"} stackId={"a"} fill="#8884d8"/>
             {/* <Bar dataKey={"amt"} stackId={"a"} fill="#82ca9d"/> */}
             {/* <Bar dataKey={"uv"}  fill="#ffc658"/> */}
         </BarChart>

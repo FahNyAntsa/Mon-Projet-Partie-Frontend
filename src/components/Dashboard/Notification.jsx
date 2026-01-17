@@ -75,6 +75,7 @@ function Notification() {
         setTimeout(() => {
             localStorage.clear()
             setCountNewUser(0)
+            setCommandNotif(0)
         }, 5000);
     }
     return (
@@ -82,8 +83,8 @@ function Notification() {
             <div className="dropdown dropdown-end " onClick={clearStorage}>
                 <div tabIndex={0} role="button" className="btn m-1 bg-transparent border-none hover:bg-transparent">
                     <div className="indicator border-none" >
-                        {commandNotif.Total > 0 ? <span className="indicator-item badge badge-xs badge-error">{commandNotif.Total}</span> : ""}
-                        {CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{CountNewUser}</span> : ""}
+                        {commandNotif.Total > 0 || CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{parseInt(commandNotif.Total) + CountNewUser}</span> : ""}
+                        {/* {CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{CountNewUser}</span> : ""} */}
                         <BellIcon className="text-navbar Usercircle"/>
                     </div>
                 </div>

@@ -19,7 +19,8 @@ function Boutique() {
     const [AccessoriesOne, setAccessoriesOne] = useState([])
     const [User, setUser] = useState()
     const [status, setStatus] = useState([])
-    const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
+    const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")) ? JSON.parse(localStorage.getItem("ProduitDansPanier")).length : 0)
+    // const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
     const handleClick = () => {
         setModalOpen(true)
     }

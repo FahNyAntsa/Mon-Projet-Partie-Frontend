@@ -26,12 +26,23 @@ function DashboardUsers() {
     const [UserSearch, setUserSearch] = useState("")
     const [UserToMap, setUserToMap] = useState([])
     const [isDark, setIsDark] = useState(false)
+    const Theme = localStorage.getItem("Theme")
     const DarkMode = () => {
         setIsDark(true)
-        document.documentElement.classList.toggle("dark")
+        document.documentElement.classList.add("dark")
+        localStorage.setItem("Theme", "dark")
     }
+    useEffect(()=>{
+        if (Theme === "dark") {
+            document.documentElement.classList.add("dark")
+            setIsDark(true)
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    },[])
     const LightMode = () => {
         setIsDark(false)
+        localStorage.setItem("Theme", "light")
         document.documentElement.classList.remove("dark")
     }
     const handleClick = () => {
@@ -112,6 +123,7 @@ function DashboardUsers() {
                         </button>
                         {AjoutOpen && <ModalAjoutUser TousLesUtilisateurs={TousLesUtilisateurs}  ProductAdded={ProductAdded} ClickAjout={ClickAjout} />}
                         {ModalConfirmOpen && <ConfirmationModal TousLesUtilisateurs={TousLesUtilisateurs} ClickDelete={ClickDelete} id={id} />}
+                        {ModifierOpen && <ModalModifierUser User={User} ClickModifier={ClickModifier} TousLesUtilisateurs={TousLesUtilisateurs} id={id}/>}
                     </div>
                     <div className="flex items-center gap-[.5vw]">
                         {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} />}
@@ -124,7 +136,7 @@ function DashboardUsers() {
                             </div>
                             {modalOpen ? <ChevronUp className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <ChevronDown className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
                             {/* <ChevronDown className="cursor-pointer" onClick={handleClick} /> */}
-                            {modalOpen && <ModalUserDashboard User={User} />}
+                            {modalOpen && <ModalUserDashboard User={User} ClickModifier={ClickModifier} TousLesUtilisateurs={TousLesUtilisateurs} id={id} />}
                         </div>
                     </div>
                 </div>

@@ -17,14 +17,26 @@ function Dashboard() {
     const [DataCommand, setDataCommand] = useState([])
     const [DataUser, setDataUser] = useState([])
     const [DataProducts, setDataProducts] = useState([])
+    const [innerCommand, setInnerCommand] = useState([])
     const navigate = useNavigate()
     const [isDark, setIsDark] = useState(false)
+    const Theme = localStorage.getItem("Theme")
     const DarkMode = () => {
         setIsDark(true)
-        document.documentElement.classList.toggle("dark")
+        document.documentElement.classList.add("dark")
+        localStorage.setItem("Theme", "dark")
     }
+    useEffect(() => {
+        if (Theme === "dark") {
+            document.documentElement.classList.add("dark")
+            setIsDark(true)
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    }, [])
     const LightMode = () => {
         setIsDark(false)
+        localStorage.setItem("Theme", "light")
         document.documentElement.classList.remove("dark")
     }
     // 
@@ -74,17 +86,28 @@ function Dashboard() {
             console.log(error)
         }
     }
-
+    const InnerCommand = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/CommandInfo`, { withCredentials: true })
+            // console.log(response.data)
+            setInnerCommand(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const Prix = innerCommand.reduce((item, i) => item + i.Price, 0)
+    // console.log(Prix)
     useEffect(() => {
         fetchDrumData()
         TousLesProduits()
         TousLesCommandes()
         TousLesUtilisateurs()
+        InnerCommand()
     }, [])
     return (
         <>
             <section className="relative bg-bgFah h-screen">
-                <Sidebars/>
+                <Sidebars />
                 <div className="pl-[17vw] pr-[2vw] w-full bg-topbar shadow shadow-shadowBox h-[4.5vw] flex justify-between items-center z-30">
                     <h1 className="text-[1.4vw] text-navbar">Tableau de bord</h1>
                     <div className="flex items-center gap-[.5vw]">
@@ -121,13 +144,13 @@ function Dashboard() {
                         <TrendingUpIcon className="IconDashboard border-2 border-white rounded-full" />
                         <div className="flex flex-col">
                             <h2 className="text-[2vw] text-white">Revenus</h2>
-                            <h1 className="text-white text-[1.6vw] flex items-center gap-[.5vw]">500 <span className="text-[1vw]">Ariary</span></h1>
+                            <h1 className="text-white text-[1.6vw] flex items-center gap-[.5vw]">{Prix.toLocaleString("fr-FR")} <span className="text-[1vw]">Ariary</span></h1>
                         </div>
                     </div>
                 </div>
                 <div className="pl-[17vw] flex justify-evenly">
                     <div>
-                        <Charts DataCommand={DataCommand} />
+                        <Charts DataCommand={innerCommand} />
                     </div>
                     <div>
                         <ChartsArea DataUser={DataUser} />

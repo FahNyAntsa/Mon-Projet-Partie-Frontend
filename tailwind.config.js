@@ -20,6 +20,11 @@ export default {
         topbar:"var(--topbar)",
         borderuser:"var(--borderuser)",
         textsidebar:"var(--textsidebar)",
+      },
+      screens:{
+        md:"768px",
+        sm:"640px",
+        lg:"1114px",
       }
     },
   },

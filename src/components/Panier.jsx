@@ -19,7 +19,7 @@ function Panier() {
     const [status, setStatus] = useState([])
     const [isCommand, setIsCommand] = useState(false)
     const [PrixToCommand, setPrixToCommand] = useState("")
-    const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")).length)
+    const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")) ? JSON.parse(localStorage.getItem("ProduitDansPanier")).length : 0)
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -97,7 +97,6 @@ function Panier() {
         localStorage.setItem("Prix", JSON.stringify(Price))
     }
     // console.log(Price)
-    const Vprix = JSON.parse(localStorage.getItem("Prix"))
     useEffect(() => {
         fetchData()
         fetchDrumData()

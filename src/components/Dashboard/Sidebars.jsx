@@ -24,9 +24,9 @@ function Sidebars() {
                     <Link className={`text-[1.1vw]! text-navbar w-full h-full absolute top-2 left-[-0.5vw] hover:text-white ${path === "/DashboardUsers" ? " text-textsidebar" : "text-navbar"}`} to={"/DashboardUsers"}>Utilisateurs</Link>
                 </button>
                 <hr />
-                <button className=" flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[1vw] px-1 relative hover:bg-green-600 hover:border-0 DIV transition-colors cursor-pointer">
-                    <TrendingUpIcon className={`Logout text-navbar hover:text-white  ${path === "/Dash" ? " text-textsidebar" : "text-navbar"}`} />
-                    <Link className="text-[1.1vw]! text-navbar w-full h-full absolute top-2 left-[-1.1vw] hover:text-white">Revenus</Link>
+                <button className={`flex  justify-start gap-[1vw] items-center h-[2.8vw]  border-black rounded-[.5vw] mt-[1vw] px-1 relative hover:bg-green-600 hover:border-0 DIV transition-colors cursor-pointer ${path === "/DashCommand" ? "bg-green-600 !text-navbar" : ""}`}>
+                    <TrendingUpIcon className={`Logout text-navbar hover:text-white  ${path === "/DashCommand" ? " text-textsidebar" : "text-navbar"}`} />
+                    <Link className={`text-[1.1vw]! text-navbar w-full h-full absolute top-2 left-[-1.1vw] hover:text-white ${path === "/DashCommand" ? " text-textsidebar" : "text-navbar"}`} to={"/DashCommand"}>Revenus</Link>
                 </button>
             </div>
         </div>

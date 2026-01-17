@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast'
 import Dashboard from './components/Dashboard/Dashboard'
 import DashProduit from './components/Dashboard/DashProduit'
 import DashboardUsers from './components/Dashboard/DashboardUsers'
+import DashCommand from './components/Dashboard/DashCommand'
 
 const Router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const Router = createBrowserRouter([
   {
     path:"/DashboardUsers",
     element:<DashboardUsers/>
+  },
+  {
+    path:"/DashCommand",
+    element:<DashCommand/>
   }
 ])
 function App() {

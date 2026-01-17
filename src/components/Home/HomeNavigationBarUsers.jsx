@@ -1,4 +1,4 @@
-import { Moon, ShoppingCartIcon, Sun, UserCircle, X } from "lucide-react";
+import { Menu, Moon, ShoppingCartIcon, Sun, UserCircle, X, XIcon } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import ModalMenu from "../ModalMenu";
 import { useState } from "react";
@@ -7,6 +7,10 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
     const path = window.location.pathname
     // console.log(User)
     // console.log(path);
+    const [open, setOpen] = useState(false)
+    const onClick = () => {
+        setOpen(!open)
+    }
     const [isDark, setIsDark] = useState(false)
     const DarkMode = () => {
         setIsDark(true)
@@ -22,59 +26,99 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
     return (
         <>
             <header
-                className="w-full h-[6vw] bg-bgFah fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
+                className="w-full lg:h-[6vw] h-[12vw] bg-bgFah top-0 fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
             >
                 <img
                     src="../src/assets/unnamed-removebg-preview.png" alt=""
-                    className="w-[5vw] h-[5vw] bg-white rounded-full cursor-pointer border-border border-[.1vw]"
+                    className="lg:w-[5vw] w-[9vw] h-[9vw] lg:h-[5vw] bg-white rounded-full cursor-pointer border-border border-[.1vw]"
                 />
-                <div className="flex justify-between gap-[3vw] w-[50vw] items-center">
+                <button className="lg:hidden ml-[2vw] " onClick={onClick}>
+                    {open ? <XIcon size={25} className="text-navbar" /> : <Menu size={25} className="text-navbar" />}
+                </button>
+                <div className="flex justify-between  lg:gap-[3vw] w-[90%] lg:w-[50vw] items-center">
                     <div>
                         <nav >
-                            <ul className={`flex gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
+                            {/* DEKTOP  */}
+                            <ul className={`lg:flex gap-3 hidden lg:gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
                                 <NavLink
-                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
+                                    className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
                                     to={"/"}
                                 >
                                     Accueil
                                 </NavLink>
                                 <NavLink
-                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                     id={path === "/Boutique" ? "active" : ""}
                                     to={"/Boutique"}
                                 >
                                     Boutique
                                 </NavLink>
                                 <NavLink
-                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Paiement
                                 </NavLink>
                                 <NavLink
-                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     A propos
                                 </NavLink>
                                 <NavLink
-                                    className={"text-navbar text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Contact
                                 </NavLink>
-
                             </ul>
+                            {/* DESKTOP FIN */}
+                            {/* MOBILE */}
+                            {open && (
+                                <ul className={`flex flex-col bg-bgFah p-2  rounded-[1vw] gap-3 lg:hidden lg:gap-8 absolute left-0 top-[13vw] ${InputSearch ? "z-0" : "z-50"}`}>
+                                    <NavLink
+                                        className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
+                                        to={"/"}
+                                    >
+                                        Accueil
+                                    </NavLink>
+                                    <NavLink
+                                        className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                        id={path === "/Boutique" ? "active" : ""}
+                                        to={"/Boutique"}
+                                    >
+                                        Boutique
+                                    </NavLink>
+                                    <NavLink
+                                        className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    >
+                                        Paiement
+                                    </NavLink>
+                                    <NavLink
+                                        className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    >
+                                        A propos
+                                    </NavLink>
+                                    <NavLink
+                                        className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    >
+                                        Contact
+                                    </NavLink>
+                                </ul>
+                            )}
+                            {/* MOBILE FIN */}
                         </nav>
                     </div>
-                    <div className="flex gap-[1.2vw] relative">
+                    {/* MOBILE*/}
+                    <div className="flex gap-[2vw]  w-[25vw] lg:w-[7vw] lg:justify-normal justify-between lg:gap-[1.2vw] relative">
                         <Link to={"/Panier"}>
-                            {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} /> : <div className="indicator">
+                            {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} /> : <div className="indicator">
                                 <span className="indicator-item badge badge-xs badge-error">{notif}</span>
-                                <ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />
-                            </div>) : (<ShoppingCartIcon className="text-navbar Usercircle cursor-pointer" id={path === "/Panier" ? "active" : ""} />)}
+                                <ShoppingCartIcon className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
+                            </div>) : (<ShoppingCartIcon className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />)}
                         </Link>
-                        {modalOpen ? <X className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <UserCircle className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
+                        {isDark ? <Sun className="lg:h-[2.5vw] lg:w-[1.5vw]  text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:h-[2.5vw] lg:w-[1.5vw]  text-navbar cursor-pointer" onClick={DarkMode} size={25} />}
+                        {modalOpen ? <X className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw]  cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} size={25} /> : <UserCircle className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw]  cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} size={25} />}
                         {modalOpen && <ModalMenu User={User} />}
-                        {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} />}
                     </div>
+                    {/* MOBILE FIN */}
                 </div>
             </header>
         </>

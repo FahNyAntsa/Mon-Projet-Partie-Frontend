@@ -28,12 +28,23 @@ function DashProduit() {
     const [UpdateCategory, setUpdateCategory] = useState("")
     const navigate = useNavigate()
     const [isDark, setIsDark] = useState(false)
+    const Theme = localStorage.getItem("Theme")
     const DarkMode = () => {
         setIsDark(true)
-        document.documentElement.classList.toggle("dark")
+        document.documentElement.classList.add("dark")
+        localStorage.setItem("Theme", "dark")
     }
+    useEffect(()=>{
+        if (Theme === "dark") {
+            document.documentElement.classList.add("dark")
+            setIsDark(true)
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    },[])
     const LightMode = () => {
         setIsDark(false)
+        localStorage.setItem("Theme", "light")
         document.documentElement.classList.remove("dark")
     }
     const handleClick = () => {

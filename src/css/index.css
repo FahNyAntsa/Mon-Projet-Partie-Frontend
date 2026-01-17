@@ -59,7 +59,7 @@
 }
 *{
   margin:0;
-  margin:0;
+  padding:0;
   box-sizing:border-box;
   font-family:inscription;
   src: url(../font/Poppins-Medium.ttf);
@@ -108,7 +108,7 @@ button{
   transition: all .1s ease-in-out !important;
 }
 .Star{
-  width: 1.2vw;
+  /* width: 1.2vw; */
   color: gold;
 }
 .Describes{
@@ -171,9 +171,7 @@ button{
 .UserProfil{
   border: solid black .1vw;
 }
-.Logout{
-  width: 1.5vw;
-}
+
 .Input{
   transition:  .2s;
 }
@@ -213,54 +211,54 @@ p{
   backdrop-filter: blur(.2vw);
   background: rgba(255, 255, 255, 0.233);
 }
-#SignInSection{
+.SignInSection{
   background: url(../assets/DrumsStudio.jpg);
   background-position: center;
   background-size: cover;
   backdrop-filter: blur(1);
 }
-#SignInSection .formulaire #formSignIn #inscription{
+.SignInSection .formulaire #formSignIn #inscription{
   font-family:inscription ;
 }
-#SignInSection .formulaire #formSignIn .ipt1 label{
+.SignInSection .formulaire #formSignIn .ipt1 label{
   position: absolute;
   top: .5vw;
   left: 2.2vw;
   transition: .1s;
 }
-#SignInSection .formulaire #formSignIn{
+.SignInSection .formulaire #formSignIn{
   border: solid rgba(255, 255, 255, 0.24) .1vw;
 }
-#SignInSection .formulaire #formSignIn #inscrire{
+.SignInSection .formulaire #formSignIn #inscrire{
   font-family: inscription;
 }
-#SignInSection .formulaire #formSignIn #inscrire:hover{
+.SignInSection .formulaire #formSignIn #inscrire:hover{
   box-shadow: 0 0 15px rgba(0,198,255,0.6);
   transition: all .2s ease;
 }
 /* FOCUS INPUT */
-#SignInSection .formulaire #formSignIn .ipt1 #nom:focus ~ #labelNom,#SignInSection .formulaire #formSignIn .ipt1 #nom:valid ~ #labelNom{
+.SignInSection .formulaire #formSignIn .ipt1 #nom:focus ~ #labelNom,.SignInSection .formulaire #formSignIn .ipt1 #nom:valid ~ #labelNom{
   transform: translateY(-1.6vw);
   background: white;
   padding: 0.1vw .5vw;
   border-radius: .2vw;
   text-decoration: underline .2vw;
 }
-#SignInSection .formulaire #formSignIn .ipt1 #prenom:focus ~ #labelPrenom,#SignInSection .formulaire #formSignIn .ipt1 #prenom:valid ~ #labelPrenom{
+.SignInSection .formulaire #formSignIn .ipt1 #prenom:focus ~ #labelPrenom,.SignInSection .formulaire #formSignIn .ipt1 #prenom:valid ~ #labelPrenom{
   transform: translateY(-1.6vw);
   background: white;
   padding: 0.1vw .5vw;
   border-radius: .2vw;
   text-decoration: underline .2vw;
 }
-#SignInSection .formulaire #formSignIn .ipt1 #email:focus ~ #labelEmail,#SignInSection .formulaire #formSignIn .ipt1 #email:valid ~ #labelEmail{
+.SignInSection .formulaire #formSignIn .ipt1 #email:focus ~ #labelEmail,.SignInSection .formulaire #formSignIn .ipt1 #email:valid ~ #labelEmail{
   transform: translateY(-1.6vw);
   background: white;
   padding: 0.1vw .5vw;
   border-radius: .2vw;
   text-decoration: underline .2vw;
 }
-#SignInSection .formulaire #formSignIn .ipt1 #password:focus ~ #labelPassword,#SignInSection .formulaire #formSignIn .ipt1 #password:valid ~ #labelPassword{
+.SignInSection .formulaire #formSignIn .ipt1 #password:focus ~ #labelPassword,.SignInSection .formulaire #formSignIn .ipt1 #password:valid ~ #labelPassword{
   transform: translateY(-1.6vw);
   background: white;
   padding: 0.1vw .5vw;
@@ -280,13 +278,13 @@ p{
   gap: 2vw;
   flex-direction: column;
 }
-#SignInSection .formulaire #formLogin #inscription{
+.SignInSection .formulaire #formLogin #inscription{
   font-size: 2vw;
   color: white;
   font-family:inscription ;
   text-align: center;
 }
-#SignInSection .formulaire #formLogin #nom{
+.SignInSection .formulaire #formLogin #nom{
   width: 100%;
   height: 2.5vw;
   background: white;
@@ -294,11 +292,11 @@ p{
   border-radius: .4vw;
 
 }
-#SignInSection .formulaire #formLogin .ipt1{
+.SignInSection .formulaire #formLogin .ipt1{
   position: relative;
 }
 
-#SignInSection .formulaire #formLogin #inscrire{
+.SignInSection .formulaire #formLogin #inscrire{
   color: white;
   font-family: inscription;
   font-size: 1vw;
@@ -311,20 +309,20 @@ p{
   margin-bottom: 0;
   cursor: pointer;
 }
-#SignInSection .formulaire #formLogin #inscrire:hover{
+.SignInSection .formulaire #formLogin #inscrire:hover{
   /* background: transparent; */
   /* border: .1vw white solid; 
   box-shadow: 0 0 15px rgba(0,198,255,0.6);
   transition: all .2s ease;
 } */
-#SignInSection .formulaire #formLogin .ipt1 #email:focus ~ #labelEmail,#SignInSection .formulaire #formLogin .ipt1 #email:valid ~ #labelEmail{
+.SignInSection .formulaire #formLogin .ipt1 #email:focus ~ #labelEmail,.SignInSection .formulaire #formLogin .ipt1 #email:valid ~ #labelEmail{
   transform: translateY(-1.6vw);
   background: white;
   padding: 0.1vw .5vw;
   border-radius: .2vw;
   text-decoration: underline .2vw;
 }
-#SignInSection .formulaire #formLogin .ipt1 #password:focus ~ #labelPassword,#SignInSection .formulaire #formLogin .ipt1 #password:valid ~ #labelPassword{
+.SignInSection .formulaire #formLogin .ipt1 #password:focus ~ #labelPassword,.SignInSection .formulaire #formLogin .ipt1 #password:valid ~ #labelPassword{
   transform: translateY(-1.6vw);
   background: white;
   padding: 0.1vw .5vw;
@@ -340,7 +338,7 @@ p{
 .UserIcon{
   width: 1.4vw;
 }
-#SignInSection .formulaire #formLogin .ipt1 label{
+.SignInSection .formulaire #formLogin .ipt1 label{
   position: absolute;
   top: .5vw;
   left: 2.2vw;

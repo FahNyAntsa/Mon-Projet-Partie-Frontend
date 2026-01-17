@@ -4,8 +4,7 @@ function HomeNavigationBar() {
     return (
         <>
             <header
-                className="w-full h-[6vw] bg-bgFah fixed flex justify-between items-center px-[4vw] py-[2vw] shadow-shadow shadow z-30"
-
+                className="w-full sm:h-[6vw] bg-bgFah fixed flex justify-between items-center px-[4vw] py-[2vw] shadow-shadow shadow z-30"
             >
                 <img
                     src="../src/assets/unnamed-removebg-preview.png" alt=""

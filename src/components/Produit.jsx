@@ -24,12 +24,6 @@ function Produit() {
             console.log(error)
         }
     }
-    const key = `user_${UserInfo.id}_panier`
-    // console.log(key)
-    const AddToPanier =(userId,product)=>{
-        const key = `user_${userId}_panier`
-        
-    }
     useEffect(() => {
         FetchInfoProduct()
     }, [])
