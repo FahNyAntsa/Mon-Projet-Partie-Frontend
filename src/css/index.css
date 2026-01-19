@@ -125,6 +125,13 @@ button{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.P{
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .PackageOpenIcon{
   width: 7vw;
   height: 12vw;

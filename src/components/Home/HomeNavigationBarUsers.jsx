@@ -26,20 +26,20 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
     return (
         <>
             <header
-                className="w-full lg:h-[6vw] h-[12vw] bg-bgFah top-0 fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
+                className="w-full lg:h-[6vw] h-[12vw] md:h-[16vw]  bg-bgFah top-0 fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
             >
                 <img
                     src="../src/assets/unnamed-removebg-preview.png" alt=""
-                    className="lg:w-[5vw] w-[9vw] h-[9vw] lg:h-[5vw] bg-white rounded-full cursor-pointer border-border border-[.1vw]"
+                    className="lg:w-[5vw] w-[9vw] h-[9vw] lg:h-[5vw] md:w-[12vw] md:h-[12vw] bg-white rounded-full cursor-pointer border-border border-[.1vw]"
                 />
                 <button className="lg:hidden ml-[2vw] " onClick={onClick}>
-                    {open ? <XIcon size={25} className="text-navbar" /> : <Menu size={25} className="text-navbar" />}
+                    {open ? <XIcon size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" /> : <Menu size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" />}
                 </button>
                 <div className="flex justify-between  lg:gap-[3vw] w-[90%] lg:w-[50vw] items-center">
-                    <div>
-                        <nav >
+                    <div className="lg:mr-[4vw]">
+                        <nav className="" >
                             {/* DEKTOP  */}
-                            <ul className={`lg:flex gap-3 hidden lg:gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
+                            <ul className={`lg:flex gap-3 hidden lg:w-[120%] lg:gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
                                 <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
                                     to={"/"}
@@ -107,15 +107,15 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
                         </nav>
                     </div>
                     {/* MOBILE*/}
-                    <div className="flex gap-[2vw]  w-[25vw] lg:w-[7vw] lg:justify-normal justify-between lg:gap-[1.2vw] relative">
+                    <div className="flex gap-[2vw] md:gap-0 md:!w-[26vw] px-[3vw] lg:!w-[30vw]   w-[29vw] justify-between lg:gap-[1.2vw] relative">
                         <Link to={"/Panier"}>
-                            {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} /> : <div className="indicator">
+                            {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} /> : <div className="indicator">
                                 <span className="indicator-item badge badge-xs badge-error">{notif}</span>
-                                <ShoppingCartIcon className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
-                            </div>) : (<ShoppingCartIcon className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />)}
+                                <ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
+                            </div>) : (<ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw]  cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />)}
                         </Link>
-                        {isDark ? <Sun className="lg:h-[2.5vw] lg:w-[1.5vw]  text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:h-[2.5vw] lg:w-[1.5vw]  text-navbar cursor-pointer" onClick={DarkMode} size={25} />}
-                        {modalOpen ? <X className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw]  cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} size={25} /> : <UserCircle className="text-navbar lg:h-[2.5vw] lg:w-[1.5vw]  cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} size={25} />}
+                        {isDark ? <Sun className="lg:!h-[2.5vw] md:!w-[5vw] md:!h-[5vw] lg:!w-[1.5vw]  text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!h-[2.5vw] lg:!w-[1.5vw]  text-navbar md:!w-[5vw] md:!h-[5vw] cursor-pointer" onClick={DarkMode} size={25} />}
+                        {modalOpen ? <X className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:h-[2.5vw] lg:w-[1.5vw]  cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} size={25} /> : <UserCircle className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw]  cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} size={25} />}
                         {modalOpen && <ModalMenu User={User} />}
                     </div>
                     {/* MOBILE FIN */}

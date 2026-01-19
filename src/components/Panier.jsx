@@ -138,9 +138,10 @@ function Panier() {
 
             />
             <section className=" w-full h-screen px-[4vw] bg-bgFah flex flex-col gap-[3vw]">
-                <div className="h-auto w-full px-[4vw] bg-bgFah absolute left-0 mt-[8vw] flex flex-col gap-[3vw]">
-                    <h1 className="text-cyan-700 text-5xl text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
-                    <div className="overflow rounded-[2vw] bg-bgFah  h-auto border-none w-full">
+                {/* DESKTOP */}
+                <div className="h-auto w-full px-[4vw] bg-bgFah absolute left-0 mt-[12vw] lg:mt-[8vw]  flex flex-col gap-[3vw]">
+                    <h1 className="text-cyan-700 lg:text-5xl text-[10vw] text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
+                    <div className="overflow rounded-[2vw] bg-bgFah lg:block hidden  h-auto border-none w-full">
                         <table className="table-auto table border-none  rounded-box">
                             <thead>
                                 <tr className="border-none">
@@ -255,7 +256,75 @@ function Panier() {
                         </dialog>
                     </div>
                     {/* <ChevronDown /> */}
+                    {/* MOBILE */}
+                    <div className="flex lg:hidden h-auto w-full flex-col p-[2vw]  gap-7">
+                        {localStorage.getItem("ProduitDansPanier") && (localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
+                            <div className="flex shadow shadow-shadowBox bg-bgFah p-[3vw] gap-2">
+                                <div className="flex flex-col  gap-2">
+                                    <img src={`../src/assets/images/${p.pics} `} alt="" className="w-full h-1/3 rounded-xl" />
+                                    <h3 className="text-Th text-base">Status :</h3>
+                                    <span className="badge badge-warning">en attente</span>
+                                    <h3 className="text-Th text-base">Action :</h3>
+                                    <div className="flex flex-col gap-4 items-center justify-center ">
+                                        <button className="bg-red-400 text-white h-8 w-full rounded-2xl text-[3.2vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
+                                        <button className=" bg-[#1ace1aee] text-white h-8 w-full rounded-2xl text-[3vw] px-[1vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
+                                    </div>
+                                </div>
+                                <div className="flex  flex-col gap-2">
+                                    <h1 className="text-[5vw] text-para">{p.name}</h1>
+                                    <p className="P text-para flex-1">{p.describes}</p>
+                                    <div className="flex gap-1">
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <h3 className="text-Th text-base">Prix :</h3>
+                                        <span className="text-para text-base">{p.Price.toLocaleString("fr-FR")} ariary</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))) : "")}
+                        {(status.map((p, index) => (
+                            <div className="flex shadow shadow-shadowBox bg-bgFah p-[3vw] gap-2">
+                                <div className="flex flex-col justify-between">
+                                    <img src={`../src/assets/images/${p.pics} `} alt="" className="!w-full h-1/3 rounded-xl" />
+                                    <h3 className="text-Th text-base">Status : {p.status === "Livré" ? <span className="badge badge-success">{p.status}</span> : <span className="badge badge-info">{p.status}</span>}</h3>
+                                    <span className="text-Th text-base">Quantité : 1</span>
+                                    <h3 className="text-Th text-base">Action :</h3>
+                                    <div className="flex flex-col gap-4 items-center justify-center ">
+                                        <button className="bg-red-400 text-white h-8 w-full rounded-2xl text-[3.2vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
+                                        <button className=" bg-[#1ace1aee] text-white h-8 w-full rounded-2xl text-[3vw] px-[1vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
+                                    </div>
+                                </div>
+                                <div className="flex  flex-col gap-2">
+                                    <h1 className="text-[5vw] text-para">{p.name}</h1>
+                                    <p className="P text-para flex-1">{p.describes}</p>
+                                    <div className="flex gap-1">
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                        <Star className="Star w-[3.5vw]" />
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <h3 className="text-Th text-base">Prix : <span className="text-para text-base">{p.price.toLocaleString("fr-FR")} ariary</span></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        )))}
+                        <hr className="bg-navbar"/>
+                        {localStorage.getItem("ProduitDansPanier") ? (
+                            <span className="text-center text-para ">Total : {Total.toLocaleString("fr-FR")}  ariary</span>
+                        ) : (
+                            <span colSpan={5} className="text-center text-para">Total : 0 ariary</span>
+                        )}
+                    </div>
+                    {/* MOBILE FIN */}
                 </div>
+                {/* DESKTOP FIN */}
             </section>
 
         </>
