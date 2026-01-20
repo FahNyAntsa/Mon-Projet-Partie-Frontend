@@ -111,7 +111,7 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
                         <Link to={"/Panier"}>
                             {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} /> : <div className="indicator">
                                 <span className="indicator-item badge badge-xs badge-error">{notif}</span>
-                                <ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
+                                <ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
                             </div>) : (<ShoppingCartIcon className="text-navbar md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw]  cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />)}
                         </Link>
                         {isDark ? <Sun className="lg:!h-[2.5vw] md:!w-[5vw] md:!h-[5vw] lg:!w-[1.5vw]  text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!h-[2.5vw] lg:!w-[1.5vw]  text-navbar md:!w-[5vw] md:!h-[5vw] cursor-pointer" onClick={DarkMode} size={25} />}

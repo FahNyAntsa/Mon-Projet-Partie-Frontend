@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BellIcon, ChevronDown, ChevronUp, EditIcon, LayoutDashboard, Moon, PlusCircle, Search, SquareArrowLeftIcon, SquareArrowRightIcon, Star, Store, Sun, Trash2Icon, TrendingUpIcon, UsersIcon } from "lucide-react";
+import { BellIcon, ChevronDown, ChevronUp, EditIcon, LayoutDashboard, MenuIcon, Moon, PlusCircle, Search, SquareArrowLeftIcon, SquareArrowRightIcon, Star, Store, Sun, Trash2Icon, TrendingUpIcon, UsersIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import ModalUserDashboard from "./ModalUserDashboard";
 import { data, Link, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import ModalAjoutPanier from "./ModalAjoutPanier";
 import ModalDeConfirmation from "./ModalDeConfirmation";
 import Notification from "./Notification";
 import Sidebars from "./Sidebars";
+import SideBarMobile from "./SideBarMobile";
 
 function DashProduit() {
     const path = window.location.pathname
@@ -27,6 +28,7 @@ function DashProduit() {
     const [id, setId] = useState(0)
     const [UpdateCategory, setUpdateCategory] = useState("")
     const navigate = useNavigate()
+    const [SideOpen, setSideOpen] = useState(false)
     const [isDark, setIsDark] = useState(false)
     const Theme = localStorage.getItem("Theme")
     const DarkMode = () => {
@@ -34,18 +36,21 @@ function DashProduit() {
         document.documentElement.classList.add("dark")
         localStorage.setItem("Theme", "dark")
     }
-    useEffect(()=>{
+    useEffect(() => {
         if (Theme === "dark") {
             document.documentElement.classList.add("dark")
             setIsDark(true)
         } else {
             document.documentElement.classList.remove("dark")
         }
-    },[])
+    }, [])
     const LightMode = () => {
         setIsDark(false)
         localStorage.setItem("Theme", "light")
         document.documentElement.classList.remove("dark")
+    }
+    const SideBarOpen = () => {
+        setSideOpen(!SideOpen)
     }
     const handleClick = () => {
         setModalOpen(true)
@@ -143,22 +148,29 @@ function DashProduit() {
     return (
         <>
             <section className="relative bg-bgFah h-screen" id="">
-                <Sidebars/>
-                <div className="pl-[17vw] pr-[2vw] w-full bg-topbar h-[4.5vw] flex justify-between items-center z-30 shadow shadow-shadowBox">
-                    <div className="flex items-center gap-[1vw]">
-                        <h1 className="text-[1.4vw] text-navbar">Produits</h1>
-                        <button className="flex text-[.8vw] gap-[.5vw] text-white bg-green-500 items-center p-[.2vw] rounded-[1vw] hover:bg-[#FFFF] hover:text-green-500 transition-colors " onClick={ClickAjout}>
+                {SideOpen && (<SideBarMobile SideBarOpen={SideBarOpen} />)}
+                <Sidebars />
+                <div className="lg:pl-[17vw] pl-[4vw] pr-[2vw] w-full bg-topbar  shadow shadow-shadowBox h-14 lg:h-[4.5vw] flex justify-between  items-center z-30">
+                    <MenuIcon className=" text-navbar lg:hidden" onClick={SideBarOpen} size={25} />
+                    {isDark ? <Sun className="lg:!w-[1.5vw] absolute left-14 lg:!h-[2.5vw] lg:hidden text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!w-[1.5vw] lg:!h-[2.5vw] text-navbar absolute left-14 lg:hidden cursor-pointer" onClick={DarkMode} size={25} />}
+                    <div className="flex absolute lg:relative items-center top-[19vw] gap-[1vw]">
+                        <h1 className="text-[1.4vw] hidden lg:flex text-navbar">Produits</h1>
+                        <button className="lg:flex hidden text-base lg:text-[.8vw] gap-[.5vw] text-white bg-green-500 items-center p-[.2vw] rounded-[1vw] hover:bg-[#FFFF] hover:text-green-500 transition-colors " onClick={ClickAjout}>
                             <PlusCircle className="Logout hover:text-green-500" />
                             Ajouter un produit
+                        </button>
+                        <button className="flex text-base lg:text-[.8vw] gap-[.5vw] text-white bg-green-500 items-center p-[.2vw] rounded-[1vw] hover:bg-[#FFFF] hover:text-green-500 transition-colors " onClick={ClickAjout}>
+                            <PlusCircle className="Logout hover:text-green-500" />
+                            
                         </button>
                         {AjoutOpen && <ModalAjoutPanier ProductAdded={ProductAdded} ClickAjout={ClickAjout} />}
                         {ModalConfirmOpen && <ModalDeConfirmation TousLesProduits={TousLesProduits} ClickDelete={ClickDelete} id={id} />}
                     </div>
                     <div className="flex items-center gap-[.5vw]">
-                        {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} />}
+                        {isDark ? <Sun className="Usercircle text-navbar hidden lg:flex cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle hidden lg:flex text-navbar cursor-pointer" onClick={DarkMode} />}
                         <Notification />
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-borderuser w-auto rounded-[2vw] px-[1vw]">
-                            <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
+                            <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="lg:!w-[3vw] lg:!h-[3vw] w-[9vw] h-[9vw] rounded-full" alt="" />
                             <div>
                                 <h1 className="text-navbar">{User ? User.prenom : ""}</h1>
                                 <span className="badge badge-xs badge-warning">Admin</span>
@@ -169,11 +181,12 @@ function DashProduit() {
                         </div>
                     </div>
                 </div>
-                <div className="  ml-[25vw] relative top-[-3.5vw] right-[7vw] w-[20vw]">
-                    <input type="search" className="w-[20vw]! ml-[25vw] absolute bg-bgFah  text-navbar text-[1vw] bg-[#0f1520]! border-[.1vw]! border-[#ffffff60]! pr-[.5vw]!" placeholder="Rechecher un produit..." onChange={(e) => handleSearch(e.target.value)} />
-                    <Search className="absolute Logout top-[.4vw] right-[-7vw] text-navbar " />
+                <div className="  ml-[25vw] top-[18vw] absolute lg:relative lg:top-[-3.5vw] right-[88vw] lg:right-[7vw] h-8 lg:w-[20vw]">
+                    <input type="search" className="lg:w-[20vw] ml-[25vw] absolute bg-navbar w-[60vw]  text-navbar h-8 text-base lg:text-[1vw] bg-[#0f1520]! border-[.1vw]! rounded-xl border-[#ffffff60]! pr-[.5vw]!" placeholder="Rechecher un produit..." onChange={(e) => handleSearch(e.target.value)} />
+                    <Search className="absolute Logout top-[.8vw] lg:top-[.4vw] lg:right-[-7vw] left-[78vw] text-bgFah  w-[5vw]" />
                 </div>
-                <div className="flex  justify-center pt-[2vw] -z-20">
+                <div className="flex flex-col lg:flex-row mt-[12vw] justify-center pt-[2vw] -z-20">
+                    <h1 className="text-[5vw] text-center underline lg:hidden text-navbar">Produits</h1>
                     <div className="overflow-x rounded-box ml-[14vw] shadow shadow-shadowBox bg-bgFah  h-auto border-base-content/8 w-[80vw] ">
                         <table className="table">
                             <thead>

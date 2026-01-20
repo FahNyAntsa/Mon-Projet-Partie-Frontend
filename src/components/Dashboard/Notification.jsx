@@ -85,21 +85,21 @@ function Notification() {
                     <div className="indicator border-none" >
                         {commandNotif.Total > 0 || CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{parseInt(commandNotif.Total) + CountNewUser}</span> : ""}
                         {/* {CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{CountNewUser}</span> : ""} */}
-                        <BellIcon className="text-navbar Usercircle"/>
+                        <BellIcon className="text-navbar lg:!w-[1.5vw] lg:!h-[2.5vw] Usercircle" size={25}/>
                     </div>
                 </div>
-                <div className="dropdown-content menu bg-bgFah rounded-box z-1 w-52 p-2">
+                <div className="dropdown-content menu bg-bgFah shadow shadow-shadowBox rounded-box z-1 lg:w-52 w-60 p-2">
                     {commandNotif.Total > 0 || CountNewUser > 0 ? (
                         <>
-                            <span className="text-[.9vw] text-navbar">il y a {commandNotif.Total} {commandNotif.Total > 1 ? "nouvelles commandes" : "nouvelle commande"}
+                            <span className="lg:text-[.9vw] text-base text-navbar">il y a {commandNotif.Total} {commandNotif.Total > 1 ? "nouvelles commandes" : "nouvelle commande"}
                             </span>
-                            <span className="text-[.9vw] text-navbar">il y a {CountNewUser} {CountNewUser > 1 ? "nouveaux utilisateurs" : "nouveau utilisateur"}
+                            <span className="lg:text-[.9vw] text-base text-navbar">il y a {CountNewUser} {CountNewUser > 1 ? "nouveaux utilisateurs" : "nouveau utilisateur"}
                             </span>
                         </>
                     ) : (
                         <>
-                            <span className="text-[.9vw] text-navbar">Pas de nouvelle commande</span>
-                            <span className="text-[.9vw] text-navbar">Pas de nouveau utilisateur</span>
+                            <span className="lg:text-[.9vw] text-base text-navbar">-Pas de nouvelle commande</span>
+                            <span className="lg:text-[.9vw] text-base text-navbar">-Pas de nouveau utilisateur</span>
                         </>
                     )}
                 </div>

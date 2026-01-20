@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BellIcon, ChevronDown, ChevronUp, LayoutDashboard, Moon, Store, Sun, TrendingUpIcon, UsersIcon } from "lucide-react";
+import { BellIcon, ChevronDown, ChevronUp, LayoutDashboard, MenuIcon, Moon, Store, Sun, TrendingUpIcon, UsersIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client"
 import ModalUserDashboard from "./ModalUserDashboard";
@@ -8,6 +8,7 @@ import Charts from "./Charts";
 import ChartsArea from "./ChartsArea";
 import Notification from "./Notification";
 import Sidebars from "./Sidebars";
+import SideBarMobile from "./SideBarMobile";
 
 function Dashboard() {
     const path = window.location.pathname
@@ -18,6 +19,7 @@ function Dashboard() {
     const [DataUser, setDataUser] = useState([])
     const [DataProducts, setDataProducts] = useState([])
     const [innerCommand, setInnerCommand] = useState([])
+    const [SideOpen, setSideOpen] = useState(false)
     const navigate = useNavigate()
     const [isDark, setIsDark] = useState(false)
     const Theme = localStorage.getItem("Theme")
@@ -39,7 +41,9 @@ function Dashboard() {
         localStorage.setItem("Theme", "light")
         document.documentElement.classList.remove("dark")
     }
-    // 
+    const SideBarOpen = () => {
+        setSideOpen(!SideOpen)
+    }
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -107,54 +111,55 @@ function Dashboard() {
     return (
         <>
             <section className="relative bg-bgFah h-screen">
+                {SideOpen && (<SideBarMobile SideBarOpen={SideBarOpen} />)}
                 <Sidebars />
-                <div className="pl-[17vw] pr-[2vw] w-full bg-topbar shadow shadow-shadowBox h-[4.5vw] flex justify-between items-center z-30">
-                    <h1 className="text-[1.4vw] text-navbar">Tableau de bord</h1>
-                    <div className="flex items-center gap-[.5vw]">
-                        {isDark ? <Sun className="Usercircle text-navbar cursor-pointer" onClick={LightMode} /> : <Moon className="Usercircle text-navbar cursor-pointer" onClick={DarkMode} />}
+                <div className="lg:pl-[17vw] pl-[4vw] pr-[2vw] w-full bg-topbar  shadow shadow-shadowBox h-14 lg:h-[4.5vw] flex justify-between  items-center z-30">
+                    <MenuIcon className=" text-navbar lg:hidden" onClick={SideBarOpen} size={25} />
+                    {isDark ? <Sun className="lg:!w-[1.5vw] absolute left-14 lg:!h-[2.5vw] lg:hidden text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!w-[1.5vw] lg:!h-[2.5vw] text-navbar absolute left-14 lg:hidden cursor-pointer" onClick={DarkMode} size={25} />}
+                    {/* <h1 className="lg:hidden absolute text-base text-navbar">Tableau de bord</h1> */}
+                    <h1 className="lg:text-[1.4vw] hidden lg:flex text-base text-navbar">Tableau de bord</h1>
+                    <div className="flex items-center lg:gap-[.5vw]">
+                        {isDark ? <Sun className="lg:!w-[1.5vw] lg:!h-[2.5vw] hidden lg:flex text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!w-[1.5vw] lg:!h-[2.5vw] text-navbar hidden lg:flex cursor-pointer" onClick={DarkMode} size={25} />}
                         <Notification />
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-borderuser w-auto rounded-[2vw] px-[1vw]">
-                            <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="w-[3vw] h-[3vw] rounded-full" alt="" />
+                            <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="lg:!w-[3vw] lg:!h-[3vw] w-[9vw] h-[9vw] rounded-full" alt="" />
                             <div>
-                                <h1 className="text-navbar">{User ? User.prenom : ""}</h1>
-                                <span className="badge badge-xs badge-warning">Admin</span>
+                                <h1 className="text-navbar text-base">{User ? User.prenom : ""}</h1>
+                                <span className="badge badge-xs lg:badge-xs badge-warning">Admin</span>
                             </div>
-                            {modalOpen ? <ChevronUp className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} /> : <ChevronDown className="text-navbar Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} />}
+                            {modalOpen ? <ChevronUp className="text-navbar shrink-0 lg:!w-[1.5vw] lg:!h-[2.5vw]  Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} size={25} /> : <ChevronDown className="text-navbar lg:!w-[1.5vw] lg:!h-[2.5vw] shrink-0  Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} size={25} />}
                             {/* <ChevronDown className="cursor-pointer" onClick={handleClick} /> */}
                             {modalOpen && <ModalUserDashboard User={User} />}
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-[41vh] pl-[17vw] pt-[2vw]  flex justify-evenly">
-                    <div className="w-[20vw] h-[12vw] flex  justify-center items-center rounded-[1vw] bg-blue-500 gap-[2vw]">
-                        <Store className="IconDashboard border-2 border-white rounded-full" />
+                <div className="w-full h-[41vh] mt-[3vw] lg:pl-[17vw] pt-[2vw] items-center gap-[4vw] flex flex-col lg:flex-row justify-evenly">
+                    <h1 className="lg:hidden  text-lg text-navbar underline">Tableau de bord</h1>
+                    <div className="lg:w-[20vw] lg:h-[12vw] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center rounded-[1vw] bg-blue-500 lg:gap-[2vw]">
+                        <Store className="lg:w-[4vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
                         <div className="flex flex-col">
-                            <h2 className="text-[2vw] text-white">Produits</h2>
-                            <h1 className="text-white text-[1.6vw] ">{DataProducts.length}</h1>
+                            <h2 className="lg:text-[2vw] text-2xl text-white">Produits</h2>
+                            <h1 className="text-white text-xl lg:text-[1.6vw] ">{DataProducts.length}</h1>
                         </div>
                     </div>
-                    <div className="w-[20vw] h-[12vw] flex  justify-center items-center rounded-[1vw] gap-[2vw] bg-amber-600">
-                        <UsersIcon className="IconDashboard border-2 border-white rounded-full" />
+                    <div className="lg:w-[20vw] lg:h-[12vw] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center  rounded-[1vw] gap-[2vw] bg-amber-600">
+                        <UsersIcon className="lg:w-[4vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
                         <div className="flex flex-col">
-                            <h2 className="text-[2vw] text-white">Utilisateurs</h2>
-                            <h1 className="text-white text-[1.6vw]">{DataUser.length}</h1>
+                            <h2 className="lg:text-[2vw] text-2xl text-white">Utilisateurs</h2>
+                            <h1 className="text-white text-xl lg:text-[1.6vw]">{DataUser.length}</h1>
                         </div>
                     </div>
-                    <div className="w-[20vw] h-[12vw] flex  justify-center items-center rounded-[1vw] bg-green-600 gap-[2vw]">
-                        <TrendingUpIcon className="IconDashboard border-2 border-white rounded-full" />
+                    <div className="lg:w-[20vw] lg:h-[12vw] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center  rounded-[1vw] bg-green-600 gap-[2vw]">
+                        <TrendingUpIcon className="lg:w-[4vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
                         <div className="flex flex-col">
-                            <h2 className="text-[2vw] text-white">Revenus</h2>
-                            <h1 className="text-white text-[1.6vw] flex items-center gap-[.5vw]">{Prix.toLocaleString("fr-FR")} <span className="text-[1vw]">Ariary</span></h1>
+                            <h2 className="lg:text-[2vw] text-2xl text-white">Revenus</h2>
+                            <h1 className="text-white text-xl lg:text-[1.6vw] flex items-center gap-[.5vw]">{Prix.toLocaleString("fr-FR")} <span className="lg:text-[1vw] text-base">Ariary</span></h1>
                         </div>
                     </div>
                 </div>
-                <div className="pl-[17vw] flex justify-evenly">
-                    <div>
-                        <Charts DataCommand={innerCommand} />
-                    </div>
-                    <div>
-                        <ChartsArea DataUser={DataUser} />
-                    </div>
+                <div className="lg:pl-[17vw] w-full h-auto flex gap-3 justify-evenly">
+                    <Charts DataCommand={innerCommand} />
+                    <ChartsArea DataUser={DataUser} />
                 </div>
             </section>
         </>

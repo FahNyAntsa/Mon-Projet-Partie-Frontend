@@ -19,7 +19,13 @@ function Panier() {
     const [status, setStatus] = useState([])
     const [isCommand, setIsCommand] = useState(false)
     const [PrixToCommand, setPrixToCommand] = useState("")
+    const [ModalCommandOpen, setModalCommandOpen] = useState(false)
     const [notif, setNotif] = useState(JSON.parse(localStorage.getItem("ProduitDansPanier")) ? JSON.parse(localStorage.getItem("ProduitDansPanier")).length : 0)
+    const Open = () => {
+        setModalCommandOpen(!ModalCommandOpen)
+        console.log(ModalCommandOpen)
+    }
+
     const handleClick = () => {
         setModalOpen(true)
     }
@@ -102,6 +108,7 @@ function Panier() {
         fetchDrumData()
         setProduct(JSON.parse(localStorage.getItem("ProduitDansPanier")))
         fetchCommand()
+
     }, [])
     const Payer = (e, Prix, SelectedProduct) => {
         e.preventDefault()
@@ -121,6 +128,17 @@ function Panier() {
     // console.log(User)
     return (
         <>
+            {/* MODAL */}
+            {ModalCommandOpen ? (<div className="w-full h-full bg-[#0000008e] flex justify-center items-center !top-0 left-0 fixed z-[9999] ">
+                <form method="POST" encType="multipart/form-data" className="w-[90%] md:w-[70%] h-auto bg-bgFah p-[2vw] flex justify-start flex-col  z-100 rounded-[1vw] relative transition-all" onSubmit={(e) => e.preventDefault()}>
+                    <h1 className="text-[#070b2b] text-[5vw] md:text-[4vw] text-center underline">Commander</h1>
+                    <button className="text-navbar text-base btn-ghost absolute right-2 top-2 btn btn-sm btn-circle Logout cursor-pointer text-[.8vw] rounded-full p-[1vw]" onClick={Open}>X</button>
+                    <label htmlFor="prix" className="text-base md:text-xl">Prix</label>
+                    <input type="number" id="prix" name="price" required className="bg-navbar p-[1vw]! rounded-md text-bgFah text-base h-8 md:h-12 mb-[2vw]" onChange={(e) => setPrixToCommand(e.target.value)} />
+                    <button className="bg-green-500 h-8 text-base hover:bg-white hover:border-[.1vw] hover:border-green-500 hover:text-green-500 md:h-12 md:text-xl transition-colors text-white p-[.5vw] rounded-md text-[1vw]" onClick={(e) => { Payer(e, SelectedProduct.Price, SelectedProduct), fetchCommand() }}>Ajouter</button>
+                </form>
+            </div>) : ""}
+            {/* MODAL FIN*/}
             <NavigationBar
                 modalOpen={modalOpen}
                 setModalOpen={setModalOpen}
@@ -257,17 +275,20 @@ function Panier() {
                     </div>
                     {/* <ChevronDown /> */}
                     {/* MOBILE */}
+
                     <div className="flex lg:hidden h-auto w-full flex-col p-[2vw]  gap-7">
                         {localStorage.getItem("ProduitDansPanier") && (localStorage.getItem("ProduitDansPanier") ? (Product.map((p, index) => (
-                            <div className="flex shadow shadow-shadowBox bg-bgFah p-[3vw] gap-2">
+                            <div className="flex shadow shadow-shadowBox bg-bgFah p-[3vw] gap-2" key={index}>
                                 <div className="flex flex-col  gap-2">
-                                    <img src={`../src/assets/images/${p.pics} `} alt="" className="w-full h-1/3 rounded-xl" />
+                                    <div className=" w-[40vw] h-[24vw]   rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                        <img src={`../src/assets/images/${p.pics} `} alt="" className="w-full h-full " />
+                                    </div>
                                     <h3 className="text-Th text-base">Status :</h3>
-                                    <span className="badge badge-warning">en attente</span>
+                                    <span className="badge md:badge-lg badge-warning">en attente</span>
                                     <h3 className="text-Th text-base">Action :</h3>
                                     <div className="flex flex-col gap-4 items-center justify-center ">
-                                        <button className="bg-red-400 text-white h-8 w-full rounded-2xl text-[3.2vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
-                                        <button className=" bg-[#1ace1aee] text-white h-8 w-full rounded-2xl text-[3vw] px-[1vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
+                                        <button className="bg-red-400 text-white md:text-[2.5vw]  h-8 w-full rounded-2xl text-[3.2vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
+                                        <button className=" bg-[#1ace1aee] text-white h-8 w-full rounded-2xl md:text-[2.5vw] text-[3vw] px-[1vw] py-[.3vw]" onClick={() => { Open(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
                                     </div>
                                 </div>
                                 <div className="flex  flex-col gap-2">
@@ -288,15 +309,17 @@ function Panier() {
                             </div>
                         ))) : "")}
                         {(status.map((p, index) => (
-                            <div className="flex shadow shadow-shadowBox bg-bgFah p-[3vw] gap-2">
+                            <div className="flex shadow shadow-shadowBox bg-bgFah p-[3vw] gap-2" key={index}>
                                 <div className="flex flex-col justify-between">
-                                    <img src={`../src/assets/images/${p.pics} `} alt="" className="!w-full h-1/3 rounded-xl" />
-                                    <h3 className="text-Th text-base">Status : {p.status === "Livré" ? <span className="badge badge-success">{p.status}</span> : <span className="badge badge-info">{p.status}</span>}</h3>
+                                    <div className="w-[40vw] h-[24vw]  rounded-[.5vw] overflow-hidden bg-blue-500 ">
+                                        <img src={`../src/assets/images/${p.pics} `} alt="" className="!w-full h-full " />
+                                    </div>
+                                    <h3 className="text-Th text-base">Status : {p.status === "Livré" ? <span className="badge md:badge-lg badge-success">{p.status}</span> : <span className="badge md:badge-lg badge-info">{p.status}</span>}</h3>
                                     <span className="text-Th text-base">Quantité : 1</span>
                                     <h3 className="text-Th text-base">Action :</h3>
                                     <div className="flex flex-col gap-4 items-center justify-center ">
-                                        <button className="bg-red-400 text-white h-8 w-full rounded-2xl text-[3.2vw] py-[.3vw]" onClick={() => CancelCommand(p.id)}>Annuler</button>
-                                        <button className=" bg-[#1ace1aee] text-white h-8 w-full rounded-2xl text-[3vw] px-[1vw] py-[.3vw]" onClick={() => { document.getElementById('my_modal_3').showModal(), console.log(p.name), setSelectedProduct(p) }}>commander</button>
+                                        <button className="bg-red-400 opacity-50 text-white h-8 w-full rounded-2xl text-[3.2vw] md:text-[2.5vw] py-[.3vw]">Annuler</button>
+                                        <button className=" bg-[#1ace1aee] opacity-50 text-white h-8 w-full rounded-2xl text-[3vw] px-[1vw] md:text-[2.5vw] py-[.3vw]" disabled >commander</button>
                                     </div>
                                 </div>
                                 <div className="flex  flex-col gap-2">
@@ -315,12 +338,30 @@ function Panier() {
                                 </div>
                             </div>
                         )))}
-                        <hr className="bg-navbar"/>
+                        <hr className="bg-navbar" />
                         {localStorage.getItem("ProduitDansPanier") ? (
-                            <span className="text-center text-para ">Total : {Total.toLocaleString("fr-FR")}  ariary</span>
+                            <span className="text-center md:text-[3vw] text-para ">Total : {Total.toLocaleString("fr-FR")}  ariary</span>
                         ) : (
                             <span colSpan={5} className="text-center text-para">Total : 0 ariary</span>
                         )}
+
+                        <dialog id="my_modal_3" className="modal bg-red-600">
+                            <div className="modal-box w-full h-[13vw] bg-bgFah">
+                                <form method="dialog">
+                                    <button className="btn btn-sm text-navbar btn-circle btn-ghost absolute right-2 top-2" onClick={() => setPrixToCommand("")}>x</button>
+                                </form>
+                                {SelectedProduct && (
+                                    <form action="" className="flex flex-col gap-[.8vw]" onSubmit={(e) => e.preventDefault()}>
+                                        <label htmlFor="Prix" className="!text-cyan-700 text-center underline !text-[1.5vw]">Montant</label>
+                                        <div className="flex gap-[1vw] text-para items-center mb-[1vw]! text-[1vw]">
+                                            <input type="number" id="Prix" placeholder="Entrez le montant à payer" className="!w-[25vw] bg-navbar text-bgFah text-[1vw] px-[1vw]!" onChange={(e) => setPrixToCommand(e.target.value)} value={PrixToCommand} required />
+                                            (en Ariary)
+                                        </div>
+                                        <button className=" bg-[#1ace1aee] text-white text-[1vw] px-[1vw] rounded-[.5vw] py-[.3vw]" onClick={(e) => { Payer(e, SelectedProduct.Price, SelectedProduct), fetchCommand() }}>Payer</button>
+                                    </form>
+                                )}
+                            </div>
+                        </dialog>
                     </div>
                     {/* MOBILE FIN */}
                 </div>

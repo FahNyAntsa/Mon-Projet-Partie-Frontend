@@ -95,11 +95,11 @@ button{
 .image{
   border-radius:0 1.5vw 1.5vw 0;
 }
-.Usercircle{
+/* .Usercircle{
   width: 1.5vw;
   height: 2.5vw;
 
-}
+} */
 .CheckCircle{
   width: 1vw;
 }

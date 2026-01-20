@@ -112,7 +112,7 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                         <Link to={"/Panier"}>
                             {notif ? (notif === 0 ? <ShoppingCartIcon className="text-navbar lg:!ml-[0vw]  md:ml-[3vw] md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} /> : <div className=" absolute ">
                                 <span className="indicator-item badge absolute right-[-.8vw]  top-[-.5vw] badge-xs badge-error">{notif}</span>
-                                <ShoppingCartIcon className="text-navbar text-red-500 lg:!ml-[0vw]  md:!ml-[3vw]  md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
+                                <ShoppingCartIcon className="text-navbar  lg:!ml-[0vw]  md:!ml-[3vw]  md:!w-[5vw] md:!h-[5vw] lg:!h-[2.5vw] lg:!w-[1.5vw] cursor-pointer" id={path === "/Panier" ? "active" : ""} size={25} />
                             </div>) : (<ShoppingCartIcon className={`text-navbar md:!w-[5vw] md:!h-[5vw] absolute lg:!h-[2.5vw] lg:!w-[1.5vw] lg:!ml-[0vw] md:ml-[3vw] cursor-pointer ${InputSearch?"-z-50":""}`} id={path === "/Panier" ? "active" : ""} size={25} />)}
                         </Link>
                         {isDark ? <Sun className={`lg:!h-[2.5vw] lg:ml-[1.5vw] md:!w-[5vw] md:!h-[5vw] lg:!w-[1.5vw] ${InputSearch?"z-0":"z-[999]"}  text-navbar cursor-pointer`} onClick={LightMode} size={25} /> : <Moon className={`lg:!h-[2.5vw] lg:ml-[1.5vw] md:!w-[5vw] md:!h-[5vw] lg:!w-[1.5vw]  text-navbar cursor-pointer ${InputSearch?"z-0":"z-[999]"}`} onClick={DarkMode} size={25} />}
