@@ -34,29 +34,29 @@ function ModalAjoutPanier({ClickAjout,ProductAdded}) {
     }
     return (
         <>
-            <div className="w-full h-screen bg-[#0000008e] flex justify-center items-center top-0 left-0 absolute z-100 ">
-                <form method="POST" encType="multipart/form-data" className="w-[25vw] h-[32vw] bg-[#ffffff] p-[2vw] flex justify-start flex-col  z-100 rounded-[1vw] relative transition-all" onSubmit={handleSubmit}>
-                    <h1 className="text-[#070b2b] text-[1.2vw] text-center underline">Ajouter un produit</h1>
-                    <button className="text-black btn-ghost absolute right-2 top-2 btn btn-sm btn-circle Logout cursor-pointer hover:text-white text-[.8vw] rounded-full p-[1vw]" onClick={ClickAjout}>X</button>
+            <div className="w-full h-screen bg-[#0000008e] flex justify-center items-center top-0 left-0 fixed lg:absolute z-[99999] ">
+                <form method="POST" encType="multipart/form-data" className="lg:!w-[25vw] w-full md:w-[70%] h-auto  bg-bgFah p-[2vw] flex justify-start flex-col  z-100 rounded-[1vw] gap-[1vw] relative transition-all" onSubmit={handleSubmit}>
+                    <h1 className="text-navbar md:text-3xl text-lg lg:text-[1.2vw] text-center underline">Ajouter un produit</h1>
+                    <button className="text-navbar btn-ghost absolute right-2 top-2 btn btn-sm btn-circle Logout cursor-pointer hover:text-white text-base md:text-xl lg:text-[.8vw] rounded-full p-[1vw]" onClick={ClickAjout}>X</button>
                     {/* <X className="text-black Logout absolute top-[.5vw] right-[.5vw] cursor-pointer hover:text-red-500" onClick={ClickAjout}/> */}
-                    <label htmlFor="nom">Nom</label>
-                    <input type="text" id="nom" name="name" required className="bg-[#070b2b]! p-[1vw]! text-[1vw]" onChange={(e)=>setNom(e.target.value)} />
-                    <label htmlFor="prix">Prix</label>
-                    <input type="number" id="prix" name="price" required className="bg-[#070b2b]! p-[1vw]! text-[1vw]" onChange={(e)=>setPrice(e.target.value)}/>
-                    <label htmlFor="description">Description</label>
-                    <textarea name="describes" required id="descritpion" className="bg-[#070b2b]! flex-1 text-[1vw] px-[1vw]! rounded-[.5vw] mb-[1vw]!" rows={3} onChange={(e)=>setDescribes(e.target.value)}></textarea>
-                    <label htmlFor="category">Catégorie</label>
-                    <select name="category" id="category" className="mb-[1vw]! text-white text-[1vw] bg-[#070b2b]! rounded-[.5vw] py-[.5vw] px-[.4vw]" onChange={(e)=>setCategory(e.target.value)}>
-                        <option value="drum" className="text-white text-[1vw]">drum</option>
-                        <option value="accessoriesOne" className="text-white text-[1vw]">accessoriesOne</option>
-                        <option value="accessoriesTwo" className="text-white text-[1vw]">accessoriesTwo</option>
+                    <label htmlFor="nom" className="text-base md:text-xl lg:text-sm text-navbar">Nom</label>
+                    <input type="text" id="nom" name="name" required className="bg-navbar md:text-xl rounded-md !p-[1vw] md:h-12 h-8 lg:h-3 text-bgFah lg:text-[1vw]" onChange={(e)=>setNom(e.target.value)} />
+                    <label htmlFor="prix" className="text-base md:text-xl lg:text-sm text-navbar">Prix</label>
+                    <input type="number" id="prix" name="price" required className="bg-navbar md:text-xl rounded-md !p-[1vw] md:h-12 lg:h-3 text-bgFah h-8 lg:text-[1vw]" onChange={(e)=>setPrice(e.target.value)}/>
+                    <label htmlFor="description" className="text-base lg:text-sm md:text-xl  text-navbar">Description</label>
+                    <textarea name="describes" required id="descritpion" className="bg-navbar md:text-xl text-bgFah flex-1 text-base lg:text-[1vw] !px-[1vw] rounded-md lg:rounded-[.5vw] mb-[1vw]!" rows={3} onChange={(e)=>setDescribes(e.target.value)}></textarea>
+                    <label htmlFor="category" className="text-base lg:text-sm md:text-xl  text-navbar">Catégorie</label>
+                    <select name="category" id="category" className="mb-[1vw]! h-8 md:h-12 md:text-xl  text-bgFah text-base lg:text-sm  bg-navbar rounded-[.5vw] py-[.5vw] px-[.4vw]" onChange={(e)=>setCategory(e.target.value)}>
+                        <option value="drum" className="text-bgFah text-xs md:text-md  lg:text-[1vw]">drum</option>
+                        <option value="accessoriesOne" className="text-bgFah md:text-md  text-xs lg:text-[1vw]">accessoriesOne</option>
+                        <option value="accessoriesTwo" className="text-bgFah md:text-md  text-xs lg:text-[1vw]">accessoriesTwo</option>
                     </select>
-                    <label htmlFor="file" className="flex items-center justify-center cursor-pointer mb-[1vw]!">
+                    <label htmlFor="file" className="flex items-center md:text-2xl lg:text-sm text-base text-navbar justify-center cursor-pointer mt-[1vw] !mb-[1vw]">
                         <ImagePlus className="cursor-pointer"/>
                         Ajouter une image
                     </label>
                     <input type="file" id="file" onChange={(e)=>{setFile(e.target.files[0])}} name="file" required hidden className="mb-[1vw]!"/>
-                    <button className="bg-green-500 hover:bg-white hover:border-[.1vw] hover:border-green-500 hover:text-green-500 transition-colors text-white p-[.5vw] rounded-[.5vw] text-[1vw]">Ajouter</button>
+                    <button className="bg-green-500 hover:bg-white hover:border-[.1vw] hover:border-green-500 hover:text-green-500 transition-colors text-white p-[.5vw] lg:rounded-[.5vw] text-base md:text-2xl rounded-md lg:text-[1vw]">Ajouter</button>
                 </form>
             </div>
         </>

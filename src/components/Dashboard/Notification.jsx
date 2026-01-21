@@ -83,23 +83,23 @@ function Notification() {
             <div className="dropdown dropdown-end " onClick={clearStorage}>
                 <div tabIndex={0} role="button" className="btn m-1 bg-transparent border-none hover:bg-transparent">
                     <div className="indicator border-none" >
-                        {commandNotif.Total > 0 || CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{parseInt(commandNotif.Total) + CountNewUser}</span> : ""}
+                        {commandNotif.Total > 0 || CountNewUser > 0 ? <span className="indicator-item md:badge-md badge badge-xs badge-error">{parseInt(commandNotif.Total) + CountNewUser}</span> : ""}
                         {/* {CountNewUser > 0 ? <span className="indicator-item badge badge-xs badge-error">{CountNewUser}</span> : ""} */}
-                        <BellIcon className="text-navbar lg:!w-[1.5vw] lg:!h-[2.5vw] Usercircle" size={25}/>
+                        <BellIcon className="text-navbar md:w-[6vw] md:h-[5vw]  lg:!w-[1.5vw] lg:!h-[2.5vw] Usercircle" size={25}/>
                     </div>
                 </div>
-                <div className="dropdown-content menu bg-bgFah shadow shadow-shadowBox rounded-box z-1 lg:w-52 w-60 p-2">
+                <div className="dropdown-content menu bg-bgFah shadow z-[9999999] shadow-shadowBox rounded-box z-1 lg:w-52 w-60 p-2">
                     {commandNotif.Total > 0 || CountNewUser > 0 ? (
                         <>
-                            <span className="lg:text-[.9vw] text-base text-navbar">il y a {commandNotif.Total} {commandNotif.Total > 1 ? "nouvelles commandes" : "nouvelle commande"}
+                            <span className="lg:text-[.9vw] text-base md:text-lg text-navbar">il y a {commandNotif.Total} {commandNotif.Total > 1 ? "nouvelles commandes" : "nouvelle commande"}
                             </span>
-                            <span className="lg:text-[.9vw] text-base text-navbar">il y a {CountNewUser} {CountNewUser > 1 ? "nouveaux utilisateurs" : "nouveau utilisateur"}
+                            <span className="lg:text-[.9vw] md:text-lg text-base text-navbar">il y a {CountNewUser} {CountNewUser > 1 ? "nouveaux utilisateurs" : "nouveau utilisateur"}
                             </span>
                         </>
                     ) : (
                         <>
-                            <span className="lg:text-[.9vw] text-base text-navbar">-Pas de nouvelle commande</span>
-                            <span className="lg:text-[.9vw] text-base text-navbar">-Pas de nouveau utilisateur</span>
+                            <span className="lg:text-[.9vw] text-base md:text-lg text-navbar">-Pas de nouvelle commande</span>
+                            <span className="lg:text-[.9vw] text-base md:text-lg text-navbar">-Pas de nouveau utilisateur</span>
                         </>
                     )}
                 </div>

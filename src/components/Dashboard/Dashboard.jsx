@@ -113,19 +113,19 @@ function Dashboard() {
             <section className="relative bg-bgFah h-screen">
                 {SideOpen && (<SideBarMobile SideBarOpen={SideBarOpen} />)}
                 <Sidebars />
-                <div className="lg:pl-[17vw] pl-[4vw] pr-[2vw] w-full bg-topbar  shadow shadow-shadowBox h-14 lg:h-[4.5vw] flex justify-between  items-center z-30">
-                    <MenuIcon className=" text-navbar lg:hidden" onClick={SideBarOpen} size={25} />
-                    {isDark ? <Sun className="lg:!w-[1.5vw] absolute left-14 lg:!h-[2.5vw] lg:hidden text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!w-[1.5vw] lg:!h-[2.5vw] text-navbar absolute left-14 lg:hidden cursor-pointer" onClick={DarkMode} size={25} />}
+                <div className="lg:pl-[17vw] pl-[4vw] pr-[2vw] md:h-20 w-full bg-topbar  shadow shadow-shadowBox h-14 lg:h-[4.5vw] flex justify-between  items-center z-30">
+                    <MenuIcon className=" text-navbar md:w-[6vw] md:h-[5vw]  lg:hidden" onClick={SideBarOpen} size={25} />
+                    {isDark ? <Sun className="lg:!w-[1.5vw] absolute left-14  md:left-24  md:w-[6vw] md:h-[5vw]  lg:!h-[2.5vw] lg:hidden text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!w-[1.5vw]  md:left-24  lg:!h-[2.5vw] text-navbar md:w-[6vw] md:h-[5vw]  absolute left-14 lg:hidden cursor-pointer" onClick={DarkMode} size={25} />}
                     {/* <h1 className="lg:hidden absolute text-base text-navbar">Tableau de bord</h1> */}
-                    <h1 className="lg:text-[1.4vw] hidden lg:flex text-base text-navbar">Tableau de bord</h1>
+                    <h1 className="lg:text-[1.4vw] hidden lg:flex  text-base text-navbar">Tableau de bord</h1>
                     <div className="flex items-center lg:gap-[.5vw]">
                         {isDark ? <Sun className="lg:!w-[1.5vw] lg:!h-[2.5vw] hidden lg:flex text-navbar cursor-pointer" onClick={LightMode} size={25} /> : <Moon className="lg:!w-[1.5vw] lg:!h-[2.5vw] text-navbar hidden lg:flex cursor-pointer" onClick={DarkMode} size={25} />}
                         <Notification />
                         <div className="flex items-center gap-[1vw] border-[.1vw] border-borderuser w-auto rounded-[2vw] px-[1vw]">
                             <img src={`http://localhost:8000/upload/users/${User ? User.photo : ""}`} className="lg:!w-[3vw] lg:!h-[3vw] w-[9vw] h-[9vw] rounded-full" alt="" />
                             <div>
-                                <h1 className="text-navbar text-base">{User ? User.prenom : ""}</h1>
-                                <span className="badge badge-xs lg:badge-xs badge-warning">Admin</span>
+                                <h1 className="text-navbar text-base md:text-2xl">{User ? User.prenom : ""}</h1>
+                                <span className="badge md:badge-lg badge-xs lg:badge-xs badge-warning">Admin</span>
                             </div>
                             {modalOpen ? <ChevronUp className="text-navbar shrink-0 lg:!w-[1.5vw] lg:!h-[2.5vw]  Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClickX} size={25} /> : <ChevronDown className="text-navbar lg:!w-[1.5vw] lg:!h-[2.5vw] shrink-0  Usercircle cursor-pointer" id={modalOpen ? "active" : ""} onClick={handleClick} size={25} />}
                             {/* <ChevronDown className="cursor-pointer" onClick={handleClick} /> */}
@@ -134,26 +134,26 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="w-full h-[41vh] mt-[3vw] lg:pl-[17vw] pt-[2vw] items-center gap-[4vw] flex flex-col lg:flex-row justify-evenly">
-                    <h1 className="lg:hidden  text-lg text-navbar underline">Tableau de bord</h1>
-                    <div className="lg:w-[20vw] lg:h-[12vw] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center rounded-[1vw] bg-blue-500 lg:gap-[2vw]">
-                        <Store className="lg:w-[4vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
+                    <h1 className="lg:hidden  text-lg text-navbar underline md:text-3xl">Tableau de bord</h1>
+                    <div className="lg:w-[20vw] lg:h-[12vw] md:w-[60%] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center rounded-[1vw] bg-blue-500 lg:gap-[2vw]">
+                        <Store className="lg:w-[4vw] lg:h-[2.5vw] md:w-[6vw] md:h-[5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
                         <div className="flex flex-col">
-                            <h2 className="lg:text-[2vw] text-2xl text-white">Produits</h2>
-                            <h1 className="text-white text-xl lg:text-[1.6vw] ">{DataProducts.length}</h1>
+                            <h2 className="lg:text-[2vw] md:text-3xl text-2xl text-white">Produits</h2>
+                            <h1 className="text-white text-xl md:text-3xl lg:text-[1.6vw] ">{DataProducts.length}</h1>
                         </div>
                     </div>
-                    <div className="lg:w-[20vw] lg:h-[12vw] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center  rounded-[1vw] gap-[2vw] bg-amber-600">
-                        <UsersIcon className="lg:w-[4vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
+                    <div className="lg:w-[20vw] lg:h-[12vw]   md:w-[60%] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center  rounded-[1vw] gap-[2vw] bg-amber-600">
+                        <UsersIcon className="lg:w-[4vw] md:w-[6vw] md:h-[5vw]  lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
                         <div className="flex flex-col">
-                            <h2 className="lg:text-[2vw] text-2xl text-white">Utilisateurs</h2>
-                            <h1 className="text-white text-xl lg:text-[1.6vw]">{DataUser.length}</h1>
+                            <h2 className="lg:text-[2vw] md:text-3xl text-2xl text-white">Utilisateurs</h2>
+                            <h1 className="text-white text-xl md:text-3xl lg:text-[1.6vw]">{DataUser.length}</h1>
                         </div>
                     </div>
-                    <div className="lg:w-[20vw] lg:h-[12vw] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center  rounded-[1vw] bg-green-600 gap-[2vw]">
-                        <TrendingUpIcon className="lg:w-[4vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
+                    <div className="lg:w-[20vw] lg:h-[12vw] md:w-[60%] w-[100%] h-[24vw] flex justify-evenly lg:justify-center items-center  rounded-[1vw] bg-green-600 gap-[2vw]">
+                        <TrendingUpIcon className="lg:w-[4vw] md:w-[6vw] md:h-[5vw] lg:h-[2.5vw] text-white  lg:border-2 border-white rounded-full" size={40} />
                         <div className="flex flex-col">
-                            <h2 className="lg:text-[2vw] text-2xl text-white">Revenus</h2>
-                            <h1 className="text-white text-xl lg:text-[1.6vw] flex items-center gap-[.5vw]">{Prix.toLocaleString("fr-FR")} <span className="lg:text-[1vw] text-base">Ariary</span></h1>
+                            <h2 className="lg:text-[2vw] md:text-3xl text-2xl text-white">Revenus</h2>
+                            <h1 className="text-white text-xl md:text-3xl lg:text-[1.6vw] flex items-center gap-[.5vw]">{Prix.toLocaleString("fr-FR")} <span className="lg:text-[1vw] md:text-xl text-base">Ariary</span></h1>
                         </div>
                     </div>
                 </div>
