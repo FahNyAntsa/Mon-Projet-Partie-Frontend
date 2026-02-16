@@ -57,14 +57,14 @@ function SignIn() {
                             <input className="text-black !px-[8vw] md:text-base rounded-lg  h-10 md:h-12 text-base lg:text-[1vw] md:!px-[6vw] lg:!px-[2vw]" type="text" name="nom" id="nom" required
                                 onChange={(e) => setNom(e.target.value)}
                             />
-                            <User className="absolute top-[8.5vw] md:top-[5vw]  md:w-[3vw] md:h-[3vw] left-[1.5vw] lg:w-[1.2vw] text-black" size={18} />
+                            <User className="absolute top-[9.5vw] md:top-[5vw]  md:w-[3vw] md:h-[3vw] left-[1.5vw] lg:w-[1.2vw] text-black" size={18} />
                         </div>
                         <div className="relative">
                             <label htmlFor="prenom" id="labelPrenom" className="text-base md:text-[2.5vw] text-white !top-[1vw] lg:!top-[1vw] left-[2.2] lg:text-[1vw]">Prénom</label>
-                            <input className="text-black !px-[8vw] md:text-base rounded-lg  h-10 md:h-12 text-base lg:text-[1vw] md:!px-[6vw] lg:!px-[2vw]" type="text" name="prenom" id="prenom" required
+                            <input className="text-black !px-[8vw] md:text-base rounded-lg  h-10 md:h-12 text-base lg:text-[1vw] md:!px-[6vw] lg:!px-[2vw] " type="text" name="prenom" id="prenom" required
                                 onChange={(e) => setPrenom(e.target.value)}
                             />
-                            <User className="absolute top-[0.2vw] left-1 UserIcon text-black" />
+                            <User className="absolute top-[9.2vw] left-1  text-black" size={20}/>
                         </div>
                         <div className="ipt1 relative">
                             <label htmlFor="password" id="labelEmail" className="text-base md:text-[2.5vw] text-white !top-[1vw] lg:!top-[.8vw] lg:text-[1vw]" >Email</label>

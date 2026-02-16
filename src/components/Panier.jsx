@@ -69,7 +69,7 @@ function Panier() {
                 navigate("/Login")
             }
         } catch (error) {
-            console.log(err)
+            console.log(error)
         }
     }
     const fetchCommand = async () => {
@@ -108,7 +108,6 @@ function Panier() {
         fetchDrumData()
         setProduct(JSON.parse(localStorage.getItem("ProduitDansPanier")))
         fetchCommand()
-
     }, [])
     const Payer = (e, Prix, SelectedProduct) => {
         e.preventDefault()
@@ -157,8 +156,8 @@ function Panier() {
             />
             <section className=" w-full h-screen px-[4vw] bg-bgFah flex flex-col gap-[3vw]">
                 {/* DESKTOP */}
-                <div className="h-auto w-full px-[4vw] bg-bgFah absolute left-0 mt-[12vw] lg:mt-[8vw]  flex flex-col gap-[3vw]">
-                    <h1 className="text-cyan-700 lg:text-5xl text-[10vw] text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
+                <div className="h-auto w-full px-[4vw] bg-bgFah absolute md:mt-[15vw] left-0 mt-[12vw] lg:mt-[8vw]  flex flex-col gap-[3vw]">
+                    <h1 className="text-cyan-700 lg:text-5xl md:text-[7vw] text-[10vw] text-center top-[4vw] left-[39vw] font-bold">Vos commandes</h1>
                     <div className="overflow rounded-[2vw] bg-bgFah lg:block hidden  h-auto border-none w-full">
                         <table className="table-auto table border-none  rounded-box">
                             <thead>
@@ -182,11 +181,11 @@ function Panier() {
                                                     <h1 className="text-para">{p.name}</h1>
                                                     <p className="text-[.8vw] text-para Description">{p.describes}</p>
                                                     <div className="flex gap-1">
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,11 +218,11 @@ function Panier() {
                                                     <h1 className="text-para">{p.name}</h1>
                                                     <p className="text-[.8vw] text-para Description">{p.describes}</p>
                                                     <div className="flex gap-1">
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
-                                                        <Star className="Star" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
+                                                        <Star className="Star w-[1.2vw]" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,7 +291,7 @@ function Panier() {
                                     </div>
                                 </div>
                                 <div className="flex  flex-col gap-2">
-                                    <h1 className="text-[5vw] text-para">{p.name}</h1>
+                                    <h1 className="text-[5vw] md:text-[3vw] text-para">{p.name}</h1>
                                     <p className="P text-para flex-1">{p.describes}</p>
                                     <div className="flex gap-1">
                                         <Star className="Star w-[3.5vw]" />
@@ -323,8 +322,8 @@ function Panier() {
                                     </div>
                                 </div>
                                 <div className="flex  flex-col gap-2">
-                                    <h1 className="text-[5vw] text-para">{p.name}</h1>
-                                    <p className="P text-para flex-1">{p.describes}</p>
+                                    <h1 className="text-[5vw] md:text-[3vw] text-para">{p.name}</h1>
+                                    <p className="P text-para md:text-[2vw] flex-1">{p.describes}</p>
                                     <div className="flex gap-1">
                                         <Star className="Star w-[3.5vw]" />
                                         <Star className="Star w-[3.5vw]" />
@@ -333,7 +332,7 @@ function Panier() {
                                         <Star className="Star w-[3.5vw]" />
                                     </div>
                                     <div className="flex gap-2">
-                                        <h3 className="text-Th text-base">Prix : <span className="text-para text-base">{p.price.toLocaleString("fr-FR")} ariary</span></h3>
+                                        <h3 className="text-Th md:text-[2.5vw] text-base">Prix : <span className="text-para md:text-[2.5vw] text-base">{p.price.toLocaleString("fr-FR")} ariary</span></h3>
                                     </div>
                                 </div>
                             </div>

@@ -35,7 +35,7 @@ function ModalUserDashboard({ User }) {
                 </div>
                 <div className="w-full flex  justify-start gap-9 items-center h-8 lg:h-[2vw] border-[.1vw] border-bgFah rounded-[.5vw] z-100  px-1 relative !transition-colors duration-75 ease-in-out hover:bg-red-500 hover:border-0 DIV">
                     <LogOutIcon className="text-navbar Logout" size={20} />
-                    <form onSubmit={Logout} className="w-full absolute top-[.3vw]">
+                    <form onSubmit={Logout} className="w-full absolute lg:top-0 top-[.3vw]">
                         <button className="w-full absolute text-navbar text-base lg:text-[1vw] md:text-xl Deconnexion">Déconnexion</button>
                     </form>
                 </div>

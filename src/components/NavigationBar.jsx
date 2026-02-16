@@ -34,11 +34,11 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                 <button className="lg:hidden absolute md:left-36 left-16 " onClick={onClick}>
                     {open ? <XIcon size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" /> : <Menu size={25} className="text-navbar  md:!w-[5vw] md:!h-[5vw]" />}
                 </button>
-                <div className="flex justify-between gap-[3vw] w-[50vw] items-center">
+                <div className="flex justify-between gap-[3vw] w-[50vw] lg:w-[40vw] items-center">
                     <div>
                         <nav >
                             {/* DESKTOP */}
-                            <ul className={`lg:flex gap-3 hidden lg:gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
+                            <ul className={`lg:flex gap-3 hidden  lg:gap-8 relative ${InputSearch ? "z-0" : "z-50"}`}>
                                 <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
                                     to={"/"}
@@ -52,11 +52,11 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                                 >
                                     Boutique
                                 </NavLink>
-                                <NavLink
+                                {/* <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Paiement
-                                </NavLink>
+                                </NavLink> */}
                                 <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
@@ -64,6 +64,8 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                                 </NavLink>
                                 <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    id={path === "/Contact" ? "active" : ""}
+                                    to={"/Contact"}
                                 >
                                     Contact
                                 </NavLink>
@@ -85,11 +87,11 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                                     >
                                         Boutique
                                     </NavLink>
-                                    <NavLink
+                                    {/* <NavLink
                                         className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                     >
                                         Paiement
-                                    </NavLink>
+                                    </NavLink> */}
                                     <NavLink
                                         className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                     >
@@ -97,6 +99,8 @@ function NavigationBar({ handleClick, modalOpen, handleSearchClick, InputSearch,
                                     </NavLink>
                                     <NavLink
                                         className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                        id={path === "/Contact" ? "active" : ""}
+                                        to={"/Contact"}
                                     >
                                         Contact
                                     </NavLink>

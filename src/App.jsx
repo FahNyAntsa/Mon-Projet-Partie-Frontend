@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard/Dashboard'
 import DashProduit from './components/Dashboard/DashProduit'
 import DashboardUsers from './components/Dashboard/DashboardUsers'
 import DashCommand from './components/Dashboard/DashCommand'
+import Contact from './components/Contact'
 
 const Router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const Router = createBrowserRouter([
   {
     path:"/DashCommand",
     element:<DashCommand/>
+  },
+  {
+    path:"/Contact",
+    element:<Contact/>
   }
 ])
 function App() {

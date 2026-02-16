@@ -10,13 +10,13 @@ function HomeNavigationBar() {
     return (
         <>
             <header
-                className="w-full sm:h-[6vw] bg-bgFah fixed flex justify-between items-center px-[4vw] py-[2vw] shadow-shadow shadow z-30"
+                className="w-full lg:h-[6vw] h-[12vw] md:h-[16vw]  bg-bgFah top-0 fixed flex justify-between items-center px-[4vw] py-[2vw] shadow shadow-shadow z-40"
             >
                 <img
                     src="../src/assets/unnamed-removebg-preview.png" alt=""
-                    className="w-[5vw] h-[5vw] bg-white border-[.1vw] border-border rounded-full cursor-pointer"
+                    className="lg:w-[5vw] w-[9vw] h-[9vw] lg:h-[5vw] md:w-[12vw] md:h-[12vw] bg-white rounded-full cursor-pointer border-border border-[.1vw]"
                 />
-                <button className="lg:hidden ml-[2vw] " onClick={onClick}>
+                <button className="lg:hidden !ml-[-16vw]" onClick={onClick}>
                     {open ? <XIcon size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" /> : <Menu size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" />}
                 </button>
                 <div className="flex  justify-between w-[50vw] items-center">
@@ -53,7 +53,7 @@ function HomeNavigationBar() {
                             </ul>
                             {/* MOBILE */}
                             {open && (
-                                <ul className={`flex flex-col bg-bgFah p-2  rounded-[1vw] gap-3 lg:hidden lg:gap-8 absolute left-0 top-[13vw] ${InputSearch ? "z-0" : "z-50"}`}>
+                                <ul className={`flex flex-col bg-bgFah p-2  rounded-[1vw] gap-3 lg:hidden lg:gap-8 absolute left-0 top-[13vw] `}>
                                     <NavLink
                                         className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"} id={path === "/" ? "active" : ""}
                                         to={"/"}
@@ -88,7 +88,7 @@ function HomeNavigationBar() {
                         </nav>
                     </div>
                     <button
-                        className="text-white bg-[linear-gradient(90deg,#00c6ff,#0072ff)] px-6 py-1 rounded-[.5vw]  text-[1vw]"
+                        className="text-white text-lg bg-[linear-gradient(90deg,#00c6ff,#0072ff)] lg:px-6 lg:py-1 px-4 rounded-md lg:rounded-[.5vw]  lg:text-[1vw]"
                     >
                         <Link to={"/SignIn"}>Rejoindre</Link>
                     </button>

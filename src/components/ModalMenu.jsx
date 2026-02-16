@@ -43,7 +43,7 @@ function ModalMenu({ User }) {
                 </div>
                 <div className="w-full flex  justify-start gap-9 items-center h-[7vw] lg:h-[2vw] border-[.1vw] border-text rounded-[.5vw]  px-1 relative !transition-colors duration-500 ease-in-out hover:bg-red-500 hover:border-0 DIV">
                     <LogOutIcon className="text-text lg:w-[1.5vw] Logout" size={17}/>
-                    <form onSubmit={Logout} className="w-full md:left-[-2.2vw] absolute top-[1vw] lg:top-[.3vw]">
+                    <form onSubmit={Logout} className="w-full lg:left-[0.3vw] md:left-[-2.2vw] absolute top-[1vw] lg:top-[.3vw]">
                         <button className="w-full absolute text-text text-[3.1vw] lg:text-[1vw] Deconnexion">Déconnexion</button>
                     </form>
                 </div>

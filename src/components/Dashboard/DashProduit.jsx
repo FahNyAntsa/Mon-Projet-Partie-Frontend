@@ -10,12 +10,14 @@ import ModalDeConfirmation from "./ModalDeConfirmation";
 import Notification from "./Notification";
 import Sidebars from "./Sidebars";
 import SideBarMobile from "./SideBarMobile";
+import ModalModifierProduit from "./ModalModifierProduit";
 
 function DashProduit() {
     const path = window.location.pathname
     // console.log(path)
     const [modalOpen, setModalOpen] = useState(false)
     const [ModalConfirmOpen, setModalConfirmOpen] = useState(false)
+    const [isModalModifierProduitOpen,setisModalModifierProduitOpen]=useState(false)
     const [User, setUser] = useState()
     const [DataProducts, setDataProducts] = useState([])
     const [page, setPage] = useState(1)
@@ -64,6 +66,9 @@ function DashProduit() {
     const ClickDelete = () => {
         setModalConfirmOpen(!ModalConfirmOpen)
         // setId(Produit.id)
+    }
+    const clickIsOpen = ()=>{
+        setisModalModifierProduitOpen(!isModalModifierProduitOpen)
     }
     const handleSearch = async (value) => {
         try {
@@ -150,6 +155,7 @@ function DashProduit() {
             <section className="relative bg-bgFah h-[110%] lg:!h-screen" id="">
                 {AjoutOpen && <ModalAjoutPanier ProductAdded={ProductAdded} ClickAjout={ClickAjout} />}
                 {SideOpen && (<SideBarMobile SideBarOpen={SideBarOpen} />)}
+                {isModalModifierProduitOpen && <ModalModifierProduit handleUpdate={handleUpdate} setNom={setNom} setPrix={setPrix} setDescribes={setDescribes} setUpdateCategory={setUpdateCategory} UpdateCategory={UpdateCategory} describes={describes} Nom={Nom} Prix={Prix} clickIsOpen={clickIsOpen} />}
                 <Sidebars />
                 <div className="lg:pl-[17vw] pl-[4vw] pr-[2vw] w-full bg-topbar  shadow shadow-shadowBox md:h-20 h-14 lg:h-[4.5vw] flex justify-between  items-center z-30">
                     <MenuIcon className=" text-navbar md:w-[6vw] md:h-[5vw] lg:hidden" onClick={SideBarOpen} size={25} />
@@ -215,7 +221,7 @@ function DashProduit() {
                                                     <Trash2Icon className="Logout text-red-500" onClick={() => { ClickDelete(id), setId(p.id) }} />
                                                 </button>
 
-                                                <button className="  text-white text-[1vw] p-[.2vw] rounded-[.5vw]   z-0" onClick={() => { document.getElementById('my_modal_3').showModal(), UpdateProduct(p.id), setId(p.id), document.body.style.overflow = "hidden" }}>
+                                                <button className="  text-white text-[1vw] p-[.2vw] rounded-[.5vw]   z-0" onClick={() => { clickIsOpen(), UpdateProduct(p.id), setId(p.id), document.body.style.overflow = "hidden" }}>
                                                     <EditIcon className="Logout text-[#72039eee]" />
                                                 </button>
                                             </div>
@@ -269,7 +275,7 @@ function DashProduit() {
                                     <button className=" text-white text-[1vw] rounded-[.5vw] p-[.2vw]">
                                         <Trash2Icon className=" text-red-500 md:w-[5vw] md:h-[4vw]" onClick={() => { ClickDelete(id), setId(p.id) }} size={23}/>
                                     </button>
-                                    <button className="  text-white text-[1vw] p-[.2vw] rounded-[.5vw]   z-0" onClick={() => { document.getElementById('my_modal_3').showModal(), UpdateProduct(p.id), setId(p.id), document.body.style.overflow = "hidden" }}>
+                                    <button className="  text-white text-[1vw] p-[.2vw] rounded-[.5vw]   z-0" onClick={() => {clickIsOpen(), UpdateProduct(p.id), setId(p.id), document.body.style.overflow = "hidden" }}>
                                         <EditIcon className="Logout text-[#72039eee] md:w-[5vw] md:h-[4vw]" size={23}/>
                                     </button>
                                 </div>

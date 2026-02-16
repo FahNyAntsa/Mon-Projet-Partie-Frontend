@@ -35,7 +35,7 @@ function ModalAjoutPanier({ClickAjout,ProductAdded}) {
     return (
         <>
             <div className="w-full h-screen bg-[#0000008e] flex justify-center items-center top-0 left-0 fixed lg:absolute z-[99999] ">
-                <form method="POST" encType="multipart/form-data" className="lg:!w-[25vw] w-full md:w-[70%] h-auto  bg-bgFah p-[2vw] flex justify-start flex-col  z-100 rounded-[1vw] gap-[1vw] relative transition-all" onSubmit={handleSubmit}>
+                <form method="POST" encType="multipart/form-data" className="lg:!w-[25vw] w-full md:w-[70%] h-auto  bg-bgFah p-[2vw] flex justify-start flex-col  z-100 rounded-[1vw] gap-[1vw] lg:gap-0 relative transition-all" onSubmit={handleSubmit}>
                     <h1 className="text-navbar md:text-3xl text-lg lg:text-[1.2vw] text-center underline">Ajouter un produit</h1>
                     <button className="text-navbar btn-ghost absolute right-2 top-2 btn btn-sm btn-circle Logout cursor-pointer hover:text-white text-base md:text-xl lg:text-[.8vw] rounded-full p-[1vw]" onClick={ClickAjout}>X</button>
                     {/* <X className="text-black Logout absolute top-[.5vw] right-[.5vw] cursor-pointer hover:text-red-500" onClick={ClickAjout}/> */}

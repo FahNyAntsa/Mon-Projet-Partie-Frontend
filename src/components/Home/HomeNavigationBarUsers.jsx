@@ -35,7 +35,7 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
                 <button className="lg:hidden ml-[2vw] " onClick={onClick}>
                     {open ? <XIcon size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" /> : <Menu size={25} className="text-navbar md:!w-[5vw] md:!h-[5vw]" />}
                 </button>
-                <div className="flex justify-between  lg:gap-[3vw] w-[90%] lg:w-[50vw] items-center">
+                <div className="flex justify-between  lg:gap-[3vw] w-[90%] lg:w-[40vw] items-center">
                     <div className="lg:mr-[4vw]">
                         <nav className="" >
                             {/* DEKTOP  */}
@@ -53,11 +53,11 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
                                 >
                                     Boutique
                                 </NavLink>
-                                <NavLink
+                                {/* <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
                                     Paiement
-                                </NavLink>
+                                </NavLink> */}
                                 <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                 >
@@ -65,6 +65,8 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
                                 </NavLink>
                                 <NavLink
                                     className={"text-navbar text-[3vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                    id={path === "/Contact" ? "active" : ""}
+                                    to={"/Contact"}
                                 >
                                     Contact
                                 </NavLink>
@@ -89,15 +91,12 @@ function HomeNavigationBarUsers({ handleClick, modalOpen, User, setModalOpen, In
                                     <NavLink
                                         className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
                                     >
-                                        Paiement
-                                    </NavLink>
-                                    <NavLink
-                                        className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
-                                    >
                                         A propos
                                     </NavLink>
                                     <NavLink
                                         className={"text-navbar text-[4vw] lg:text-[1.1vw] Navlink hover:text-[#00b7ff] flex gap-1"}
+                                        id={path === "/Contact" ? "active" : ""}
+                                        to={"/Contact"}
                                     >
                                         Contact
                                     </NavLink>
